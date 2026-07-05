@@ -1,0 +1,145 @@
+{
+    "general": {
+        "actions": {
+            "save": "Save",
+            "edit": "Edit",
+            "update": "Update",
+            "delete": "Delete",
+            "cancel": "Cancel",
+            "loadMore": "Load more",
+            "loading": "Loading...",
+            "browseIcons": "Browse icons"
+        },
+        "apiKey": "API Key",
+        "theme": {
+            "label": "Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+        }
+    },
+    "home": {
+        "whatIs": {
+            "title": "What is ROMGrid?",
+            "intro": "ROMGrid turns your images into ROM icons styled like the real hardware — 3DS, NDSi, PSP and more.",
+            "framesIntro": "It's all built around the",
+            "framesTerm": "Frame",
+            "framesBody": ": a template that shapes your icon to match a specific console or style such as UMD disks, cartridges and more, new ones will keep landing."
+        },
+        "iconGen": {
+            "title": "Icon generation",
+            "intro": "Everything you need to generate your ROM icons:",
+            "items": {
+                "steamgrid": "Scrapping from SteamGridDB (more will come in future updates)",
+                "borders": "Console frames (3DS home menu icons and more upcoming!)",
+                "batch": "Batch export for multiple games at once"
+            }
+        },
+        "community": {
+            "title": "Community frames",
+            "comingSoon": "Coming soon",
+            "intro": "Soon you'll be able to share and discover frames from the community:",
+            "items": {
+                "upload": "Upload your own frame",
+                "browse": "Browse and download community creations",
+                "rate": "Rate and comment on them"
+            }
+        },
+        "support": {
+            "title": "How can I support this project?",
+            "intro": "There are many ways to contribute:",
+            "items": {
+                "bugs": "Reporting bugs and suggesting improvements",
+                "code": "Contributing to code or documentation via Pull Requests",
+                "donate": "Donating (still not available)"
+            },
+            "github": "You can access the project on GitHub from the button below.",
+            "visitRepository": "Visit repository"
+        },
+        "follow": {
+            "title": "Where can I follow ROMGrid progress?",
+            "p1": "At this moment the project is in its early stages of development. You can follow the progress on the GitHub repository, but we don't have a dedicated social media account yet.",
+            "p2": "The first step will be to create a dedicated YouTube channel, where I'll share updates and any interesting topics.",
+            "p3": "Feel free to make suggestions and stay tuned for updates!"
+        },
+        "copyright": "2026 ROMGrid. All rights reserved."
+    },
+    "assetMaker": {
+        "steps": {
+            "search": {
+                "title": "Step 1: Select game/s",
+                "breadcrumb": "Select games",
+                "description": "Search and select the games you want to create assets for",
+                "continueButtonLabel": "Continue with {gamesCount} game(s)",
+                "releaseDateNotAvailable": "Release date not available",
+                "searchPlaceholder": "Search by game name...",
+                "emptyTitle": "No games found",
+                "emptyDescription": "Try a different search term",
+                "loadingTitle": "Searching games...",
+                "clearGames": "Clear selection",
+                "noApiKeyTitle": "No API key configured",
+                "noApiKeyDescription": "You need a SteamGridDB API key to search for games. Go to Settings to add one."
+            },
+            "icon": {
+                "title": "Step 2: Adjust styles",
+                "breadcrumb": "Pick icons",
+                "description": "Choose the icon that you want to use for your game",
+                "noMoreIcons": "No more icons to load",
+                "noIconsAvailable": "No icons available for this game",
+                "loadingIcons": "Loading icons...",
+                "customLabel": "Custom",
+                "customImageAlt": "Custom image",
+                "backButton": "Back",
+                "nextButton": "Next",
+                "clearSelection": "Clear selection",
+                "noIconsTitle": "No icons found",
+                "nextButtonTooltip": "Select one icon for each game to continue"
+            },
+            "customize": {
+                "title": "Step 3: Customize",
+                "breadcrumb": "Customize",
+                "description": "Adjust your icons to match your favourite style and export them",
+                "preview": {
+                    "title": "Icon preview",
+                    "description": "This is how your icon will look when exported"
+                },
+                "settings": {
+                    "title": "Settings",
+                    "description": "Tweak the icon to find the perfect style",
+                    "size": "Size",
+                    "backgroundColor": "Background color",
+                    "borderRadius": "Icon border radius — {value}%"
+                },
+                "frames": {
+                    "title": "Frames",
+                    "none": {
+                        "title": "No frame",
+                        "description": "The icon will be exported as-is, without any frame"
+                    },
+                    "3ds": {
+                        "title": "Nintendo 3DS",
+                        "description": "Classic Nintendo 3DS home menu style"
+                    }
+                },
+                "export": "Export",
+                "exportProgress": {
+                    "title": "Exporting icons",
+                    "description": "Generating PNG files for your selected games. This may take a moment.",
+                    "current": "Exporting {name}…",
+                    "counter": "{current} of {total}",
+                    "zipping": "Packaging into ZIP…",
+                    "successTitle": "Export complete",
+                    "successDescription": "{total} icon(s) packaged and downloaded as romgrid-icons.zip.",
+                    "close": "Close"
+                },
+                "checkBoardCaption": "Checkboard background represents colour abstenance and won't be included in your icon once exported"
+            }
+        }
+    },
+    "settings": {
+        "sgdb": {
+            "title": "SteamGridDB",
+            "description": "Set up your SteamGridDB API Key to enable fetching of game metadata and images from SteamGridDB. You can find your API key inyour SteamGridDB account settings"
+        }
+    }
+}
