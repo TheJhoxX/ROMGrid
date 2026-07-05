@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ROMGrid
 
-## Getting Started
+Create ROM icons styled like the real hardware — 3DS, DSi, PSP and more.
 
-First, run the development server:
+Pick your games, choose an icon, customize frame/background/size, and export a batch of PNGs bundled in a zip. Everything runs in your browser.
+
+> Status: **beta**. Expect breaking changes and rough edges. Feedback and PRs welcome.
+
+## What is a Frame?
+
+A **Frame** is the core concept of ROMGrid. It's a visual template that wraps your icon so it looks like a native asset from a specific console — defining its shape and which areas are opaque or transparent in the final export. New Frames will keep being added to cover more consoles and formats.
+
+## Features
+
+- Search games via [SteamGridDB](https://www.steamgriddb.com/)
+- Pick an icon per game (from SGDB or upload your own)
+- Customize per game: background color, border radius, size, frame style
+- Batch export to a single `.zip`
+- Light / dark / system theme
+- Works offline once loaded — your SGDB key never leaves your browser
+
+## Stack
+
+Next.js 16 · React 19 · TypeScript · Tailwind v4 · shadcn/ui · TanStack Query · next-intl · next-themes.
+
+## Getting started
+
+Requires Node.js 20+ and [pnpm](https://pnpm.io/).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### SteamGridDB API key
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ROMGrid uses the SteamGridDB public API. To search games:
 
-## Learn More
+1. Get a free key at [steamgriddb.com/profile/preferences/api](https://www.steamgriddb.com/profile/preferences/api).
+2. Open the in-app **Settings** page and paste it there.
 
-To learn more about Next.js, take a look at the following resources:
+The key is stored in your browser's `localStorage`. It's never sent to any server other than SteamGridDB's own API (proxied through Next.js API routes to avoid CORS).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome — bug reports, ideas and pull requests all count.
 
-## Deploy on Vercel
+- Open an [issue](https://github.com/TheJhoxX/ROMGrid/issues) before starting a big change so we can agree on the approach.
+- Match the existing style (Prettier + ESLint run on every save; no comments unless the *why* is non-obvious).
+- All UI strings live in `messages/en.json` and use `useTranslations`.
+- Prefer editing existing files over creating new ones; reach for shadcn primitives before hand-rolling UI.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Adding a new Frame
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A Frame is the most useful thing you can contribute. To add one (e.g. `dsi`, `psp`, `umd`, `gamecube`):
+
+1. Add the id to `CONSOLE_FRAME_STYLES` in `src/components/custom/Frame/Frame.tsx`.
+2. Write its `<Component>` using container-query units (`cqmin`) so it scales with the wrapper.
+3. If the standard export engine can't reproduce it (e.g. discs needing masks / clip-path), provide a `customExport` and register it in the `FRAMES` map.
+4. Add translations for the frame's `title` and `description` under `assetMaker.steps.customize.frames.<id>` in `messages/en.json`.
+5. Test it in the `/uikit` playground and the full flow in `/asset-maker`.
+
+## Roadmap
+
+- More Frames (DSi, PSP UMD, GameCube disc, PS1 jewel case, cartridge variants…)
+- Additional export formats and sizes
+- More languages
+
+## License
+
+See [LICENSE](./LICENSE). Source is available for review and contributions; redistribution and commercial use are restricted.
