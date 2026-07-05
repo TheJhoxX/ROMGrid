@@ -11,16 +11,25 @@ import {
 import { Copyright, GitCommitHorizontal } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
 
 export default function Home() {
     const t = useTranslations('home')
 
     const renderCartridge = () => (
-        <img
-            src='/images/logo.svg'
-            alt='ROMGrid logo'
-            className='animate-float h-auto w-sm md:w-md lg:w-lg'
-        />
+        <div className='animate-float relative inline-block'>
+            <img
+                src='/images/logo.svg'
+                alt='ROMGrid logo'
+                className='h-auto w-sm md:w-md lg:w-lg'
+            />
+            <Badge
+                variant='secondary'
+                className='absolute -top-2 -right-2 rotate-12 text-sm font-bold uppercase shadow-md'
+            >
+                {t('betaBadge')}
+            </Badge>
+        </div>
     )
 
     const renderCartridgeShadow = () => (

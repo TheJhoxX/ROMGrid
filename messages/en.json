@@ -19,6 +19,7 @@
         }
     },
     "home": {
+        "betaBadge": "beta",
         "whatIs": {
             "title": "What is ROMGrid?",
             "intro": "ROMGrid turns your images into ROM icons styled like the real hardware — 3DS, NDSi, PSP and more.",
