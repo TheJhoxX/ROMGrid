@@ -15,16 +15,16 @@ const NoneFrame: React.FC<PropsWithChildren> = ({ children }) => <>{children}</>
 const ThreeDSFrame: React.FC<PropsWithChildren> = ({ children }) => (
     <div className='@container-[size] h-full w-full'>
         <div
-            className='relative h-full w-full overflow-hidden rounded-[15%] bg-linear-to-b from-white from-90% to-[#D3D3D3] ring-[0.5cqmin] ring-[#E3E3E3]'
+            className='relative h-full w-full overflow-hidden rounded-[15%] bg-linear-to-b from-white from-90% to-[#B2B2B2] ring-[0.2cqmin] ring-[#E3E3E3]'
             style={{
-                boxShadow: 'inset 0 0 1.5cqmin 1cqmin rgba(0,0,0,0.2)',
+                boxShadow: 'inset 0 -3px 1cqmin 1cqmin rgba(0,0,0,0.2)',
             }}
         >
             <div
                 className='absolute inset-0 overflow-hidden rounded-[8%] bg-[#ebebeb]'
                 style={{
-                    inset: '14cqmin',
-                    boxShadow: '0 0 3cqmin 1.5cqmin rgba(0,0,0,0.2)',
+                    inset: '16cqmin',
+                    boxShadow: '0 0 2cqmin 2.5cqmin rgba(0,0,0,0.15)',
                 }}
             >
                 {children}
