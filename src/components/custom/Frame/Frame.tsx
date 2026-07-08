@@ -15,7 +15,7 @@ const NoneFrame: React.FC<PropsWithChildren> = ({ children }) => <>{children}</>
 const ThreeDSFrame: React.FC<PropsWithChildren> = ({ children }) => (
     <div className='@container-[size] h-full w-full'>
         <div
-            className='relative h-full w-full overflow-hidden rounded-[15%] bg-linear-to-b from-white from-90% to-[#B3B3B3] ring-[0.2cqmin] ring-[#E3E3E3]'
+            className='relative h-full w-full overflow-hidden rounded-[15%] bg-linear-to-b from-white from-90% to-[#B2B2B2] ring-[0.2cqmin] ring-[#E3E3E3]'
             style={{
                 boxShadow: 'inset 0 -3px 1cqmin 1cqmin rgba(0,0,0,0.2)',
             }}
