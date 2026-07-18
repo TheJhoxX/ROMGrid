@@ -41,6 +41,32 @@ import type { AssetMakerStep } from '../types'
 
 const DEBOUNCE_DELAY = 200
 
+type SearchStatus = 'no-key' | 'loading' | 'no-results' | 'results'
+
+const SEARCH_STATUS_MAP: Record<
+    Exclude<SearchStatus, 'results'>,
+    {
+        Icon: React.ComponentType<{ className?: string }>
+        titleKey: string
+        descriptionKey?: string
+    }
+> = {
+    'no-key': {
+        Icon: KeyRound,
+        titleKey: 'noApiKeyTitle',
+        descriptionKey: 'noApiKeyDescription',
+    },
+    loading: {
+        Icon: Spinner,
+        titleKey: 'loadingTitle',
+    },
+    'no-results': {
+        Icon: ImageOff,
+        titleKey: 'emptyTitle',
+        descriptionKey: 'emptyDescription',
+    },
+}
+
 export type SearchStepProps = {
     onGameClick: (gameId: number, gameName: string) => void
     onChangeStep: (nextStep: AssetMakerStep) => void
@@ -124,51 +150,48 @@ export const SearchStep = ({
                     </Button>
                 </div>
             </div>
-            {!hasSgdbKey ? (
-                <Empty>
-                    <EmptyHeader>
-                        <EmptyMedia>
-                            <KeyRound className='size-8' />
-                        </EmptyMedia>
-                        <EmptyTitle>{t('noApiKeyTitle')}</EmptyTitle>
-                        <EmptyDescription>
-                            {t('noApiKeyDescription')}
-                        </EmptyDescription>
-                    </EmptyHeader>
-                </Empty>
-            ) : isFetching ? (
-                <Empty>
-                    <EmptyHeader>
-                        <EmptyMedia>
-                            <Spinner className='size-8' />
-                        </EmptyMedia>
-                        <EmptyTitle>{t('loadingTitle')}</EmptyTitle>
-                    </EmptyHeader>
-                </Empty>
-            ) : debouncedQuery && games.length === 0 ? (
-                <Empty>
-                    <EmptyHeader>
-                        <EmptyMedia>
-                            <ImageOff className='size-8' />
-                        </EmptyMedia>
-                        <EmptyTitle>{t('emptyTitle')}</EmptyTitle>
-                        <EmptyDescription>
-                            {t('emptyDescription')}
-                        </EmptyDescription>
-                    </EmptyHeader>
-                </Empty>
-            ) : (
-                <div className='grid w-full flex-1 grid-cols-1 content-start gap-4 overflow-y-auto p-4 md:grid-cols-3 lg:grid-cols-4'>
-                    {games?.map((game: SGDBGameWithCover) => (
-                        <GamePreview
-                            key={game.id}
-                            game={game}
-                            isGameSelected={selectedGames.has(game.id)}
-                            onGameClick={onGameClick}
-                        />
-                    ))}
-                </div>
-            )}
+            {(() => {
+                const status: SearchStatus = !hasSgdbKey
+                    ? 'no-key'
+                    : isFetching
+                      ? 'loading'
+                      : debouncedQuery && games.length === 0
+                        ? 'no-results'
+                        : 'results'
+
+                if (status === 'results') {
+                    return (
+                        <div className='grid w-full flex-1 grid-cols-1 content-start gap-4 md:grid-cols-3 lg:grid-cols-4'>
+                            {games?.map((game: SGDBGameWithCover) => (
+                                <GamePreview
+                                    key={game.id}
+                                    game={game}
+                                    isGameSelected={selectedGames.has(game.id)}
+                                    onGameClick={onGameClick}
+                                />
+                            ))}
+                        </div>
+                    )
+                }
+
+                const { Icon, titleKey, descriptionKey } =
+                    SEARCH_STATUS_MAP[status]
+                return (
+                    <Empty>
+                        <EmptyHeader>
+                            <EmptyMedia>
+                                <Icon className='size-8' />
+                            </EmptyMedia>
+                            <EmptyTitle>{t(titleKey)}</EmptyTitle>
+                            {descriptionKey && (
+                                <EmptyDescription>
+                                    {t(descriptionKey)}
+                                </EmptyDescription>
+                            )}
+                        </EmptyHeader>
+                    </Empty>
+                )
+            })()}
         </div>
     )
 }

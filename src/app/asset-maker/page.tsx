@@ -204,8 +204,10 @@ const AssetMaker = () => {
     }
 
     return (
-        <div className='flex h-[calc(100svh-7rem)] w-full flex-col items-center gap-6 overflow-hidden p-4'>
-            {header()}
+        <div className='flex w-full flex-col items-center gap-6 p-4'>
+            <div className='bg-background/80 sticky top-0 z-20 -mx-4 flex w-[calc(100%+2rem)] flex-col gap-2 px-4 py-3 backdrop-blur'>
+                {header()}
+            </div>
             {content()}
         </div>
     )

@@ -39,7 +39,7 @@ export default function RootLayout({
             suppressHydrationWarning
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-            <body className='mt-24 flex flex-col'>
+            <body className='flex flex-col'>
                 <Providers>
                     <NextIntlClientProvider>
                         <HomeNavigationMenu />
