@@ -40,7 +40,7 @@ const navigationMenuItems: NavigationMenuItemType[] = [
 export const HomeNavigationMenu = () => {
     const pathname = usePathname()
     return (
-        <div className='bg-background/15 sticky flex w-full items-center justify-between gap-1 border-b px-2 py-1 backdrop-blur-md'>
+        <div className='bg-background sticky top-0 z-50 flex w-full items-center justify-between gap-1 px-2 py-1'>
             <Tooltip>
                 <TooltipTrigger asChild>
                     <Link

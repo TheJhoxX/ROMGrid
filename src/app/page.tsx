@@ -37,7 +37,7 @@ export default function Home() {
     )
 
     return (
-        <>
+        <div className='mt-12'>
             <div className='relative flex w-full flex-col items-center justify-center'>
                 <TunnelGrid className='absolute inset-0 h-full w-full' />
                 <div className='relative z-10 flex flex-col justify-center'>
@@ -150,6 +150,6 @@ export default function Home() {
                 <Copyright className='h-4 w-4' />
                 <p>{t('copyright')}</p>
             </div>
-        </>
+        </div>
     )
 }

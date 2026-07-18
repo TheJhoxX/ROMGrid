@@ -15,7 +15,6 @@ import { useSGDBSearch } from '@/hooks/useSgdbSearch'
 import { useApiKeys, ScraperKeyId } from '@/hooks/useApiKeys'
 import { cn } from '@/lib/utils'
 import {
-    ArrowBigRight,
     BadgeCheck,
     Calendar,
     Eraser,
@@ -69,14 +68,14 @@ const SEARCH_STATUS_MAP: Record<
 
 export type SearchStepProps = {
     onGameClick: (gameId: number, gameName: string) => void
-    onChangeStep: (nextStep: AssetMakerStep) => void
     onClearGames: () => void
     selectedGames: Map<number, GameConfig>
 }
 
+const MAX_GAME_CHIPS_AMMOUNT = 5
+
 export const SearchStep = ({
     onGameClick,
-    onChangeStep,
     onClearGames,
     selectedGames,
 }: SearchStepProps) => {
@@ -94,29 +93,44 @@ export const SearchStep = ({
         <div className='flex min-h-0 w-full flex-1 flex-col gap-6'>
             <div className='flex flex-col gap-4'>
                 {selectedGames.size > 0 && (
-                    <div className='flex flex-col gap-4 md:flex-row md:justify-between'>
+                    <div className='flex flex-wrap justify-between gap-4'>
                         <div className='flex flex-wrap items-center gap-2'>
-                            {[...selectedGames.entries()].map(
-                                ([gameId, gameConfig]) => (
-                                    <Badge
-                                        key={gameId}
-                                        className='bg-primary/10 text-primary border-primary/30 gap-1 border pr-1 font-medium'
-                                    >
-                                        {gameConfig.name}
-                                        <button
-                                            onClick={() =>
-                                                onGameClick(
-                                                    gameId,
-                                                    gameConfig.name,
-                                                )
-                                            }
-                                            className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
-                                            aria-label={`Remove ${gameConfig.name}`}
+                            {selectedGames.size < MAX_GAME_CHIPS_AMMOUNT ? (
+                                [...selectedGames.entries()].map(
+                                    ([gameId, gameConfig]) => (
+                                        <Badge
+                                            key={gameId}
+                                            className='bg-primary/10 text-primary border-primary/30 gap-1 border pr-1 font-medium'
                                         >
-                                            <X className='h-3 w-3' />
-                                        </button>
-                                    </Badge>
-                                ),
+                                            {gameConfig.name}
+                                            <button
+                                                onClick={() =>
+                                                    onGameClick(
+                                                        gameId,
+                                                        gameConfig.name,
+                                                    )
+                                                }
+                                                className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
+                                                aria-label={`Remove ${gameConfig.name}`}
+                                            >
+                                                <X className='h-3 w-3' />
+                                            </button>
+                                        </Badge>
+                                    ),
+                                )
+                            ) : (
+                                <Badge className='bg-primary/10 text-primary border-primary/30 gap-1 border pr-1 font-medium'>
+                                    {t('gamesAmountSelected', {
+                                        gamesAmount: selectedGames.size,
+                                    })}
+                                    <button
+                                        onClick={() => onClearGames()}
+                                        className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
+                                        aria-label={`Remove all`}
+                                    >
+                                        <X className='h-3 w-3' />
+                                    </button>
+                                </Badge>
                             )}
                         </div>
                         <Button
@@ -125,7 +139,7 @@ export const SearchStep = ({
                             className='bg-secondary/30 text-secondary w-fit cursor-pointer'
                             title={t('clearGames')}
                         >
-                            Clear selected game(s)
+                            {t('clearGames')}
                             <Eraser className='h-4 w-4' />
                         </Button>
                     </div>
@@ -138,16 +152,6 @@ export const SearchStep = ({
                         value={query}
                         placeholder={t('searchPlaceholder')}
                     />
-                    <Button
-                        disabled={selectedGames.size === 0}
-                        onClick={() => onChangeStep('icon')}
-                        className='cursor-pointer'
-                    >
-                        {t('continueButtonLabel', {
-                            gamesCount: selectedGames.size,
-                        })}
-                        <ArrowBigRight fill='var(--color-background)' />
-                    </Button>
                 </div>
             </div>
             {(() => {

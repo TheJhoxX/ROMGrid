@@ -15,6 +15,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
+import { Button } from '@/components/ui/button'
+import { ArrowBigRight } from 'lucide-react'
 
 export type SelectedIcon =
     | { kind: 'sgdb'; image: SGDBImage }
@@ -155,60 +157,76 @@ const AssetMaker = () => {
         const description = t(`steps.${currentStep}.description`)
         const currentIndex = STEP_ORDER.indexOf(currentStep)
         return (
-            <>
-                <Breadcrumb className='w-full'>
-                    <BreadcrumbList className='text-base'>
-                        {STEP_ORDER.map((step, index) => {
-                            const label = t(`steps.${step}.breadcrumb`)
-                            const isCurrent = step === currentStep
-                            const isPast = index < currentIndex
-                            return (
-                                <Fragment key={step}>
-                                    <BreadcrumbItem>
-                                        {isCurrent ? (
-                                            <BreadcrumbPage className='text-2xl font-bold'>
-                                                {label}
-                                            </BreadcrumbPage>
-                                        ) : isPast ? (
-                                            <BreadcrumbLink
-                                                asChild
-                                                className='text-xl font-semibold'
-                                            >
-                                                <button
-                                                    type='button'
-                                                    className='cursor-pointer'
-                                                    onClick={() =>
-                                                        handleChangeStep(step)
-                                                    }
-                                                >
+            <div className='space-y-4'>
+                <div className='flex items-center justify-between gap-4'>
+                    <Breadcrumb className='w-full text-sm'>
+                        <BreadcrumbList>
+                            {STEP_ORDER.map((step, index) => {
+                                const label = t(`steps.${step}.breadcrumb`)
+                                const isCurrent = step === currentStep
+                                const isPast = index < currentIndex
+                                return (
+                                    <Fragment key={step}>
+                                        <BreadcrumbItem>
+                                            {isCurrent ? (
+                                                <BreadcrumbPage className='font-bold'>
                                                     {label}
-                                                </button>
-                                            </BreadcrumbLink>
-                                        ) : (
-                                            <span className='text-muted-foreground/60 text-xl font-semibold'>
-                                                {label}
-                                            </span>
+                                                </BreadcrumbPage>
+                                            ) : isPast ? (
+                                                <BreadcrumbLink
+                                                    asChild
+                                                    className='font-semibold'
+                                                >
+                                                    <button
+                                                        type='button'
+                                                        className='cursor-pointer'
+                                                        onClick={() =>
+                                                            handleChangeStep(
+                                                                step,
+                                                            )
+                                                        }
+                                                    >
+                                                        {label}
+                                                    </button>
+                                                </BreadcrumbLink>
+                                            ) : (
+                                                <span className='text-muted-foreground/60 font-semibold'>
+                                                    {label}
+                                                </span>
+                                            )}
+                                        </BreadcrumbItem>
+                                        {index < STEP_ORDER.length - 1 && (
+                                            <BreadcrumbSeparator />
                                         )}
-                                    </BreadcrumbItem>
-                                    {index < STEP_ORDER.length - 1 && (
-                                        <BreadcrumbSeparator />
-                                    )}
-                                </Fragment>
-                            )
+                                    </Fragment>
+                                )
+                            })}
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                    <Button
+                        disabled={selectedGames.size === 0}
+                        onClick={() => handleChangeStep('icon')}
+                        className='cursor-pointer'
+                    >
+                        {t('continueButtonLabel', {
+                            gamesCount: selectedGames.size,
                         })}
-                    </BreadcrumbList>
-                </Breadcrumb>
-                <p className='text-muted-foreground w-full'>{description}</p>
-            </>
+                        <ArrowBigRight />
+                    </Button>
+                </div>
+                <p className='text-muted-foreground w-full text-xs'>
+                    {description}
+                </p>
+            </div>
         )
     }
 
     return (
-        <div className='flex w-full flex-col items-center gap-6 p-4'>
-            <div className='bg-background/80 sticky top-0 z-20 -mx-4 flex w-[calc(100%+2rem)] flex-col gap-2 px-4 py-3 backdrop-blur'>
+        <div className='flex w-full flex-col items-center gap-2'>
+            <div className='bg-background sticky top-13.5 z-20 flex w-full flex-col gap-2 px-6 py-3'>
                 {header()}
             </div>
-            {content()}
+            <div className='w-full px-6'>{content()}</div>
         </div>
     )
 }

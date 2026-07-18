@@ -66,12 +66,12 @@
         "copyright": "2026 ROMGrid. All rights reserved."
     },
     "assetMaker": {
+        "continueButtonLabel": "Continue",
         "steps": {
             "search": {
                 "title": "Step 1: Select game/s",
                 "breadcrumb": "Select games",
                 "description": "Search and select the games you want to create assets for",
-                "continueButtonLabel": "Continue with {gamesCount} game(s)",
                 "releaseDateNotAvailable": "Release date not available",
                 "searchPlaceholder": "Search by game name...",
                 "emptyTitle": "No games found",
@@ -79,7 +79,8 @@
                 "loadingTitle": "Searching games...",
                 "clearGames": "Clear selection",
                 "noApiKeyTitle": "No API key configured",
-                "noApiKeyDescription": "You need a SteamGridDB API key to search for games. Go to Settings to add one."
+                "noApiKeyDescription": "You need a SteamGridDB API key to search for games. Go to Settings to add one.",
+                "gamesAmountSelected": "{gamesAmount} games selected"
             },
             "icon": {
                 "title": "Step 2: Adjust styles",
