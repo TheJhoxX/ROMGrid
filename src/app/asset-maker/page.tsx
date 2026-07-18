@@ -38,6 +38,22 @@ export type GameConfig = {
 
 export const STEP_ORDER: AssetMakerStep[] = ['search', 'icon', 'customize']
 
+type StepAdvanceConfig = {
+    canContinue: (games: Map<number, GameConfig>) => boolean
+}
+
+const STEP_ADVANCE: Record<AssetMakerStep, StepAdvanceConfig | null> = {
+    search: {
+        canContinue: (games) => games.size > 0,
+    },
+    icon: {
+        canContinue: (games) =>
+            games.size > 0 &&
+            [...games.values()].every((g) => g.selectedIcon !== null),
+    },
+    customize: null,
+}
+
 const DEFAULT_ICON_ADJUSTMENT: IconAdjustment = {
     backgroundColor: '#00000000',
     frameStyle: 'none',
@@ -128,7 +144,6 @@ const AssetMaker = () => {
                 <SearchStep
                     onGameClick={handleFirstStepGameClick}
                     selectedGames={selectedGames}
-                    onChangeStep={handleChangeStep}
                     onClearGames={handleClearGames}
                 />
             )
@@ -139,7 +154,6 @@ const AssetMaker = () => {
                     selectedGames={selectedGames}
                     onSelectIcon={handleSelectIcon}
                     onClearIcon={handleClearIcon}
-                    onChangeStep={handleChangeStep}
                 />
             )
         }
@@ -156,10 +170,12 @@ const AssetMaker = () => {
     const header = () => {
         const description = t(`steps.${currentStep}.description`)
         const currentIndex = STEP_ORDER.indexOf(currentStep)
+        const advance = STEP_ADVANCE[currentStep]
+        const nextStep = STEP_ORDER[currentIndex + 1]
         return (
             <div className='space-y-4'>
                 <div className='flex items-center justify-between gap-4'>
-                    <Breadcrumb className='w-full text-sm'>
+                    <Breadcrumb className='w-full grow'>
                         <BreadcrumbList>
                             {STEP_ORDER.map((step, index) => {
                                 const label = t(`steps.${step}.breadcrumb`)
@@ -167,7 +183,7 @@ const AssetMaker = () => {
                                 const isPast = index < currentIndex
                                 return (
                                     <Fragment key={step}>
-                                        <BreadcrumbItem>
+                                        <BreadcrumbItem className='text-base lg:text-xl'>
                                             {isCurrent ? (
                                                 <BreadcrumbPage className='font-bold'>
                                                     {label}
@@ -203,16 +219,16 @@ const AssetMaker = () => {
                             })}
                         </BreadcrumbList>
                     </Breadcrumb>
-                    <Button
-                        disabled={selectedGames.size === 0}
-                        onClick={() => handleChangeStep('icon')}
-                        className='cursor-pointer'
-                    >
-                        {t('continueButtonLabel', {
-                            gamesCount: selectedGames.size,
-                        })}
-                        <ArrowBigRight />
-                    </Button>
+                    {advance && nextStep && (
+                        <Button
+                            disabled={!advance.canContinue(selectedGames)}
+                            onClick={() => handleChangeStep(nextStep)}
+                            className='cursor-pointer'
+                        >
+                            {t('continueButtonLabel')}
+                            <ArrowBigRight />
+                        </Button>
+                    )}
                 </div>
                 <p className='text-muted-foreground w-full text-xs'>
                     {description}

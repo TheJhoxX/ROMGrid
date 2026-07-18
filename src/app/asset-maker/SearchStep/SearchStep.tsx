@@ -36,7 +36,6 @@ import { useBreakpoint } from '@/hooks/useBreakpoint'
 import type { GameConfig } from '../page'
 import { useTranslations } from 'next-intl'
 import { Spinner } from '@/components/ui/spinner'
-import type { AssetMakerStep } from '../types'
 
 const DEBOUNCE_DELAY = 200
 

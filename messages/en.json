@@ -8,7 +8,7 @@
             "cancel": "Cancel",
             "loadMore": "Load more",
             "loading": "Loading...",
-            "browseIcons": "Browse icons"
+            "browseIcons": "Browse more icons"
         },
         "apiKey": "API Key",
         "theme": {
@@ -87,6 +87,7 @@
                 "breadcrumb": "Pick icons",
                 "description": "Choose the icon that you want to use for your game",
                 "noMoreIcons": "No more icons to load",
+                "noIconsToLoad": "No icons to load",
                 "noIconsAvailable": "No icons available for this game",
                 "loadingIcons": "Loading icons...",
                 "customLabel": "Custom",
