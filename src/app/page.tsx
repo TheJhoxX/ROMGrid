@@ -123,7 +123,7 @@ export default function Home() {
                         <Link
                             href='https://github.com/TheJhoxX/ROMGrid.git'
                             target='_blank'
-                            className='text-accent bg-primary flex items-center gap-2 rounded-lg px-2 py-1'
+                            className='text-primary-foreground bg-primary flex items-center gap-2 rounded-lg px-2 py-1'
                         >
                             <GitCommitHorizontal />
                             <p>{t('support.visitRepository')}</p>

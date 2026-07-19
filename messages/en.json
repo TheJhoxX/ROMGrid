@@ -77,6 +77,8 @@
                 "emptyTitle": "No games found",
                 "emptyDescription": "Try a different search term",
                 "loadingTitle": "Searching games...",
+                "idleTitle": "Start searching",
+                "idleDescription": "Type a game name in the search bar to find matches on SteamGridDB",
                 "clearGames": "Clear selection",
                 "noApiKeyTitle": "No API key configured",
                 "noApiKeyDescription": "You need a SteamGridDB API key to search for games. Go to Settings to add one.",

@@ -20,6 +20,7 @@ import {
     Eraser,
     ImageOff,
     KeyRound,
+    Search,
     X,
 } from 'lucide-react'
 import {
@@ -39,7 +40,7 @@ import { Spinner } from '@/components/ui/spinner'
 
 const DEBOUNCE_DELAY = 200
 
-type SearchStatus = 'no-key' | 'loading' | 'no-results' | 'results'
+type SearchStatus = 'no-key' | 'loading' | 'idle' | 'no-results' | 'results'
 
 const SEARCH_STATUS_MAP: Record<
     Exclude<SearchStatus, 'results'>,
@@ -57,6 +58,11 @@ const SEARCH_STATUS_MAP: Record<
     loading: {
         Icon: Spinner,
         titleKey: 'loadingTitle',
+    },
+    idle: {
+        Icon: Search,
+        titleKey: 'idleTitle',
+        descriptionKey: 'idleDescription',
     },
     'no-results': {
         Icon: ImageOff,
@@ -159,9 +165,11 @@ export const SearchStep = ({
                     ? 'no-key'
                     : isFetching
                       ? 'loading'
-                      : debouncedQuery && games.length === 0
-                        ? 'no-results'
-                        : 'results'
+                      : !debouncedQuery
+                        ? 'idle'
+                        : games.length === 0
+                          ? 'no-results'
+                          : 'results'
 
                 if (status === 'results') {
                     return (

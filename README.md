@@ -51,6 +51,10 @@ Contributions are very welcome — bug reports, ideas and pull requests all coun
 
 Head over to the [issues](https://github.com/TheJhoxX/ROMGrid/issues) tab to see planned work, in-progress features and open ideas. That's the source of truth for what's coming — feel free to comment on anything that interests you or open a new issue if you have something in mind.
 
+## Privacy
+
+ROMGrid keeps your data on your device and uses cookieless analytics only to measure aggregate usage. See [PRIVACY.md](./PRIVACY.md) for details.
+
 ## License
 
 See [LICENSE](./LICENSE). Source is available for review and contributions; redistribution and commercial use are restricted.
