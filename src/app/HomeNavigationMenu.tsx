@@ -53,7 +53,12 @@ export const HomeNavigationMenu = () => {
                             width={32}
                             height={32}
                         />
-                        <p className='font-bold'>ROMGrid</p>
+                        <p className='font-bold'>
+                            ROM
+                            <span className='from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent'>
+                                Grid
+                            </span>
+                        </p>
                     </Link>
                 </TooltipTrigger>
                 <TooltipContent>{'Home'}</TooltipContent>

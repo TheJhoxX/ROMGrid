@@ -1,20 +1,11 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { HomeNavigationMenu } from './HomeNavigationMenu'
 import { Providers } from './Providers'
 import { Analytics } from '@vercel/analytics/next'
-
-const geistSans = Geist({
-    variable: '--font-sans',
-    subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-})
 
 const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -60,7 +51,7 @@ export default function RootLayout({
         <html
             lang='en'
             suppressHydrationWarning
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
         >
             <body className='mb-12 flex flex-col'>
                 <Providers>
