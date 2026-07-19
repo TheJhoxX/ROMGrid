@@ -72,7 +72,7 @@ export const HomeNavigationMenu = () => {
                                             className={cn(
                                                 navigationMenuTriggerStyle(),
                                                 'rounded-full',
-                                                'data-active:bg-primary data-active:text-background data-active:hover:bg-primary data-active:focus:bg-primary data-active:focus:text-background',
+                                                'data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary data-active:focus:bg-primary data-active:focus:text-primary-foreground',
                                             )}
                                         >
                                             <Link href={item.href}>

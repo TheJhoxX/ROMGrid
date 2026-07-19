@@ -327,7 +327,7 @@ const AssetMaker = () => {
                             !action.canRun(selectedGames) || exportState.active
                         }
                         onClick={stepActionHandlers[currentStep]}
-                        className='cursor-pointer'
+                        className='text-primary-foreground cursor-pointer'
                     >
                         {t(action.labelKey)}
                         <ActionIcon />
