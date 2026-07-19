@@ -134,8 +134,7 @@
                     "successTitle": "Export complete",
                     "successDescription": "{total} icon(s) packaged and downloaded as romgrid-icons.zip.",
                     "close": "Close"
-                },
-                "checkBoardCaption": "Checkboard background represents colour abstenance and won't be included in your icon once exported"
+                }
             }
         }
     },
