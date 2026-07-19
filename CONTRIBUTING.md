@@ -1,12 +1,12 @@
 # Contributing to ROMGrid
 
-Thanks for taking the time to contribute. This document is the source of truth for how changes get into the project.
+Thanks for taking the time to contribute! This document walks you through how changes make it into the project. If anything is unclear, please open an issue and we'll help you out.
 
 ## Before you start
 
-- Open an [issue](https://github.com/TheJhoxX/ROMGrid/issues) before starting anything non-trivial. It's the fastest way to know whether the idea fits and to avoid wasted work.
-- All PRs to `main` require review and approval from **@TheJhoxX** — direct pushes are blocked.
-- One PR = one focused change. Small, reviewable PRs get merged; large drive-by rewrites don't.
+- Check the [issues](https://github.com/TheJhoxX/ROMGrid/issues) tab first — it's the source of truth for what's planned or in progress. Feel free to comment on one you'd like to take, or open a new issue to discuss a new idea before writing code. This helps avoid duplicated work and gives you a quick sanity check on the approach.
+- All PRs to `main` are reviewed by **@TheJhoxX** before merging. This is just to keep the codebase coherent while the project is young — not a gatekeeping thing.
+- Smaller, focused PRs are easier to review and land faster. If you have a large change in mind, consider splitting it into logical steps.
 
 ## Development setup
 
@@ -21,15 +21,15 @@ Open [http://localhost:3000](http://localhost:3000). You'll need a [SteamGridDB 
 
 ## Code guidelines
 
-These are the rules used across the codebase. Match them.
+These are conventions the codebase already follows. We strongly recommend sticking to them so the project stays consistent, but if you have a good reason to deviate, feel free to raise it in the PR.
 
-- **No comments unless the *why* is non-obvious.** Well-named identifiers self-document. Don't explain *what* the code does; only leave a comment when there's a hidden constraint, subtle invariant, workaround, or surprising behavior.
-- **No new files unless necessary.** Prefer editing existing files.
-- **All UI strings via `useTranslations`.** Add keys to `messages/en.json` — never hardcode user-facing text in JSX.
-- **shadcn first.** Check `src/components/ui/` before reaching for external libraries or hand-rolling primitives.
-- **Skip placebo error handling.** Trust internal callers and framework guarantees. Only validate at real boundaries (user input, external APIs).
-- **Don't inject HTML into translations.** Compose in JSX (`{t('intro')} <strong>{t('term')}</strong>`) — never `dangerouslySetInnerHTML`.
-- **Match existing style.** Prettier + ESLint run on save. If in doubt, run `pnpm lint` and `pnpm typecheck` before pushing.
+- **Comments only when the *why* is non-obvious.** Well-named identifiers already document *what* the code does. Comments are best kept for hidden constraints, subtle invariants, workarounds or surprising behavior — otherwise they tend to drift out of sync with the code and become misleading.
+- **Prefer editing existing files over creating new ones.** Keeps the file tree easy to navigate and avoids fragmenting related logic. New files are of course fine when a new module genuinely belongs somewhere separate.
+- **UI strings live in `messages/en.json`** and are read via `useTranslations`. This keeps translations discoverable in one place and makes it easy to add new languages later.
+- **Check `src/components/ui/` before reaching for another library.** shadcn primitives are already installed and styled to match the design system — reusing them keeps the UI coherent.
+- **Skip defensive error handling for scenarios that can't happen.** Trust internal callers and framework guarantees. Validation belongs at real boundaries — user input and external APIs.
+- **Don't inject HTML into translations.** Compose in JSX instead (`{t('intro')} <strong>{t('term')}</strong>`). It's safer and keeps translations plain text.
+- **Match the existing style.** Prettier + ESLint run on save; `pnpm lint` and `pnpm typecheck` should pass before pushing.
 
 ## Adding a new Frame
 
@@ -45,14 +45,14 @@ Frames must produce a correct export at the exact requested pixel size, with tra
 
 ## Pull request checklist
 
-Before requesting review, make sure:
+A quick sanity check before requesting review:
 
 - [ ] `pnpm lint` passes
 - [ ] `pnpm typecheck` passes (or `pnpm build`)
-- [ ] All new user-facing text is in `messages/en.json`
+- [ ] New user-facing text lives in `messages/en.json`
 - [ ] Manually tested in the browser — both the change and any flow it touches
 - [ ] Screenshots or a short clip attached for UI changes
-- [ ] Commit messages are clear (no `wip`, no `fix stuff`)
+- [ ] Clear commit messages
 
 ## Reporting bugs
 
