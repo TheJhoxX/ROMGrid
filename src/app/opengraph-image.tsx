@@ -1,10 +1,15 @@
 import { ImageResponse } from 'next/og'
 import { readFile } from 'fs/promises'
 import path from 'path'
+import { getTranslations } from 'next-intl/server'
 
-export const alt = 'ROMGrid — ROM icon generator'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
+
+export async function generateImageMetadata() {
+    const t = await getTranslations('og')
+    return [{ id: 'default', alt: t('imageAlt'), size, contentType }]
+}
 
 const geistPath = (weight: string) =>
     path.join(
@@ -13,6 +18,7 @@ const geistPath = (weight: string) =>
     )
 
 export default async function Image() {
+    const t = await getTranslations('og')
     const [logoBuffer, geistRegular, geistBold] = await Promise.all([
         readFile(path.join(process.cwd(), 'public/images/logo.svg')),
         readFile(geistPath('Regular')),
@@ -75,7 +81,7 @@ export default async function Image() {
                         lineHeight: 1.3,
                     }}
                 >
-                    Generate icons for your ROMs styled like real console assets
+                    {t('tagline')}
                 </span>
             </div>
         ),
