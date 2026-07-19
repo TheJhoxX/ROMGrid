@@ -123,7 +123,7 @@ export const SearchStep = ({
                                         gamesAmount: selectedGames.size,
                                     })}
                                     <button
-                                        onClick={() => onClearGames()}
+                                        onClick={onClearGames}
                                         className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
                                         aria-label={`Remove all`}
                                     >
@@ -133,10 +133,11 @@ export const SearchStep = ({
                             )}
                         </div>
                         <Button
-                            size='sm'
+                            size='xs'
                             onClick={onClearGames}
-                            className='bg-secondary/30 text-secondary w-fit cursor-pointer'
                             title={t('clearGames')}
+                            variant='secondary'
+                            className='cursor-pointer!'
                         >
                             {t('clearGames')}
                             <Eraser className='h-4 w-4' />

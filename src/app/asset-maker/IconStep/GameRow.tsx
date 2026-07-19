@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { CustomImageUpload } from './CustomImageUpload'
 import { cn } from '@/lib/utils'
 import type { SGDBImage } from 'steamgriddb'
-import { ImageOff, Plus } from 'lucide-react'
+import { CloudDownload, Plus } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Spinner } from '@/components/ui/spinner'
 import { Button } from '@/components/ui/button'
@@ -39,7 +39,10 @@ export const GameRow = ({
                 <CustomImageUpload
                     isSelected={gameConfig.selectedIcon?.kind === 'custom'}
                     onChangeUrl={(url) => {
-                        if (!url) onClearIcon()
+                        if (!url) {
+                            onClearIcon()
+                            return
+                        }
                         onSelectIcon({ kind: 'custom', url })
                     }}
                     previewUrl={
@@ -53,7 +56,7 @@ export const GameRow = ({
                         key={image.id}
                         onClick={() => onSelectIcon({ kind: 'sgdb', image })}
                         className={cn(
-                            'hover:ring-primary checkerboard relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg shadow-md ring-2 ring-transparent transition-all duration-300',
+                            'hover:ring-primary bg-muted relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg shadow-md ring-2 ring-transparent transition-all duration-300',
                             isSelected(image) && 'ring-primary shadow-primary',
                         )}
                     >
@@ -78,30 +81,37 @@ export const GameRow = ({
                 <div className='grid grid-cols-4 gap-4 md:grid-cols-6 lg:grid-cols-8'>
                     {renderGrid()}
                 </div>
-                <div className='flex items-center justify-center'>
-                    {hasNextPage ? (
-                        <Button
-                            onClick={() => fetchNextPage()}
-                            disabled={isFetchingNextPage}
-                            className='inline-flex w-fit items-center gap-2'
-                        >
-                            {isFetchingNextPage ? (
-                                <Spinner className='size-6' />
-                            ) : (
-                                <Plus className='size-6' />
-                            )}
-                            <span className='text-xs font-medium'>
-                                {tActions('loadMore')}
-                            </span>
-                        </Button>
-                    ) : (
-                        <div className='text-muted-foreground text-center text-xs'>
-                            {icons.length === 0
-                                ? t('noIconsToLoad')
-                                : t('noMoreIcons')}
-                        </div>
-                    )}
-                </div>
+                {!isLoading ? (
+                    <div className='flex items-center justify-center'>
+                        {hasNextPage ? (
+                            <Button
+                                onClick={() => fetchNextPage()}
+                                disabled={isFetchingNextPage}
+                                className='inline-flex w-fit cursor-pointer items-center gap-2'
+                            >
+                                {isFetchingNextPage ? (
+                                    <Spinner />
+                                ) : (
+                                    <CloudDownload />
+                                )}
+                                <span className='text-xs font-medium'>
+                                    {tActions('loadMore')}
+                                </span>
+                            </Button>
+                        ) : (
+                            <div className='text-muted-foreground text-center text-xs'>
+                                {icons.length === 0
+                                    ? t('noIconsToLoad')
+                                    : t('noMoreIcons')}
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className='inline-flex'>
+                        {tActions('loading')}
+                        <Spinner />
+                    </div>
+                )}
             </div>
         </div>
     )
