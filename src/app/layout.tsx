@@ -16,9 +16,19 @@ const geistMono = Geist_Mono({
     subsets: ['latin'],
 })
 
+const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : 'http://localhost:3000')
+
+const siteDescription =
+    'Generate icons for your ROMs styled like real console assets. Frame-based, batch export, runs in your browser.'
+
 export const metadata: Metadata = {
+    metadataBase: new URL(siteUrl),
     title: 'ROMGrid',
-    description: 'A console and community based ROM asset generator',
+    description: siteDescription,
     icons: {
         icon: [
             { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -27,6 +37,18 @@ export const metadata: Metadata = {
         apple: '/apple-touch-icon.png',
     },
     manifest: '/site.webmanifest',
+    openGraph: {
+        type: 'website',
+        url: siteUrl,
+        siteName: 'ROMGrid',
+        title: 'ROMGrid — ROM icon generator',
+        description: siteDescription,
+    },
+    twitter: {
+        card: 'summary',
+        title: 'ROMGrid — ROM icon generator',
+        description: siteDescription,
+    },
 }
 
 export default function RootLayout({
