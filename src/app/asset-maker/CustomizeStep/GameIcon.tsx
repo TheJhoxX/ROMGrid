@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Frame } from '@/components/custom/Frame/Frame'
 import type { GameConfig, SelectedIcon } from '../page'
 
@@ -14,26 +13,19 @@ type GameIconProps = {
 export const GameIcon = ({ game, mode }: GameIconProps) => {
     if (!game.selectedIcon) return null
     const { backgroundColor, borderRadius, frameStyle } = game.iconAdjustment
-    const src = getIconUrl(game.selectedIcon)
     const isPreview = mode === 'preview'
 
     return (
-        <Frame style={frameStyle}>
-            <div className='absolute inset-0'>
-                <div
-                    className='absolute inset-0'
-                    style={{ backgroundColor }}
-                />
-                <Image
-                    src={src}
-                    alt={game.name}
-                    fill
-                    priority={!isPreview}
-                    loading={isPreview ? 'lazy' : 'eager'}
-                    className='object-cover'
-                    style={{ borderRadius: `${borderRadius}%` }}
-                />
-            </div>
-        </Frame>
+        <Frame
+            style={frameStyle}
+            icon={{
+                src: getIconUrl(game.selectedIcon),
+                alt: game.name,
+                backgroundColor,
+                borderRadius,
+                priority: !isPreview,
+                loading: isPreview ? 'lazy' : 'eager',
+            }}
+        />
     )
 }

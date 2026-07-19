@@ -37,7 +37,7 @@ export default function Home() {
     )
 
     return (
-        <>
+        <div className='mt-12'>
             <div className='relative flex w-full flex-col items-center justify-center'>
                 <TunnelGrid className='absolute inset-0 h-full w-full' />
                 <div className='relative z-10 flex flex-col justify-center'>
@@ -86,7 +86,7 @@ export default function Home() {
                 <Card className='transition-all duration-300 ease-in-out hover:-translate-y-1.5'>
                     <CardHeader>
                         <CardTitle>{t('community.title')}</CardTitle>
-                        <CardAction className='border-chart-1 bg-muted text-muted-foreground flex items-center gap-2 rounded-full border px-2 py-1 font-bold'>
+                        <CardAction className='text-secondary-foreground bg-secondary flex items-center gap-2 rounded-full px-2 py-1 font-bold'>
                             <p>{t('community.comingSoon')}</p>
                             <span>👀</span>
                         </CardAction>
@@ -123,7 +123,7 @@ export default function Home() {
                         <Link
                             href='https://github.com/TheJhoxX/ROMGrid.git'
                             target='_blank'
-                            className='text-accent bg-accent-foreground flex items-center gap-2 rounded-lg px-2 py-1'
+                            className='text-primary-foreground bg-primary flex items-center gap-2 rounded-lg px-2 py-1'
                         >
                             <GitCommitHorizontal />
                             <p>{t('support.visitRepository')}</p>
@@ -150,6 +150,6 @@ export default function Home() {
                 <Copyright className='h-4 w-4' />
                 <p>{t('copyright')}</p>
             </div>
-        </>
+        </div>
     )
 }

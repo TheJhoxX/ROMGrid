@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { ScraperKeyId, useApiKeys } from './useApiKeys'
 import { SGDBImage } from 'steamgriddb'
 
-const PAGE_SIZE = 5
+const PAGE_SIZE = 6
 
 export function useSgdbIcons({ gameId }: { gameId: number | null }) {
     const { apiKeys } = useApiKeys()

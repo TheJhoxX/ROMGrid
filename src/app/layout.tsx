@@ -4,6 +4,7 @@ import './globals.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { HomeNavigationMenu } from './HomeNavigationMenu'
 import { Providers } from './Providers'
+import { Analytics } from '@vercel/analytics/next'
 
 const geistSans = Geist({
     variable: '--font-sans',
@@ -39,13 +40,14 @@ export default function RootLayout({
             suppressHydrationWarning
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-            <body className='mt-24 flex flex-col'>
+            <body className='mb-12 flex flex-col'>
                 <Providers>
                     <NextIntlClientProvider>
                         <HomeNavigationMenu />
                         {children}
                     </NextIntlClientProvider>
                 </Providers>
+                <Analytics />
             </body>
         </html>
     )

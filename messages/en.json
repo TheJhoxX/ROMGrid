@@ -8,7 +8,7 @@
             "cancel": "Cancel",
             "loadMore": "Load more",
             "loading": "Loading...",
-            "browseIcons": "Browse icons"
+            "browseIcons": "Browse more icons"
         },
         "apiKey": "API Key",
         "theme": {
@@ -66,26 +66,30 @@
         "copyright": "2026 ROMGrid. All rights reserved."
     },
     "assetMaker": {
+        "continueButtonLabel": "Continue",
         "steps": {
             "search": {
                 "title": "Step 1: Select game/s",
                 "breadcrumb": "Select games",
                 "description": "Search and select the games you want to create assets for",
-                "continueButtonLabel": "Continue with {gamesCount} game(s)",
                 "releaseDateNotAvailable": "Release date not available",
                 "searchPlaceholder": "Search by game name...",
                 "emptyTitle": "No games found",
                 "emptyDescription": "Try a different search term",
                 "loadingTitle": "Searching games...",
+                "idleTitle": "Start searching",
+                "idleDescription": "Type a game name in the search bar to find matches on SteamGridDB",
                 "clearGames": "Clear selection",
                 "noApiKeyTitle": "No API key configured",
-                "noApiKeyDescription": "You need a SteamGridDB API key to search for games. Go to Settings to add one."
+                "noApiKeyDescription": "You need a SteamGridDB API key to search for games. Go to Settings to add one.",
+                "gamesAmountSelected": "{gamesAmount} games selected"
             },
             "icon": {
                 "title": "Step 2: Adjust styles",
                 "breadcrumb": "Pick icons",
                 "description": "Choose the icon that you want to use for your game",
                 "noMoreIcons": "No more icons to load",
+                "noIconsToLoad": "No icons to load",
                 "noIconsAvailable": "No icons available for this game",
                 "loadingIcons": "Loading icons...",
                 "customLabel": "Custom",
@@ -132,8 +136,7 @@
                     "successTitle": "Export complete",
                     "successDescription": "{total} icon(s) packaged and downloaded as romgrid-icons.zip.",
                     "close": "Close"
-                },
-                "checkBoardCaption": "Checkboard background represents colour abstenance and won't be included in your icon once exported"
+                }
             }
         }
     },

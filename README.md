@@ -4,7 +4,7 @@ Create ROM icons styled like the real hardware — 3DS, DSi, PSP and more.
 
 Pick your games, choose an icon, customize frame/background/size, and export a batch of PNGs bundled in a zip. Everything runs in your browser.
 
-> Status: **beta**. Expect breaking changes and rough edges. Feedback and PRs welcome.
+> Status: **beta**. Expect breaking changes and rough edges.
 
 ## What is a Frame?
 
@@ -45,28 +45,15 @@ The key is stored in your browser's `localStorage`. It's never sent to any serve
 
 ## Contributing
 
-Contributions are welcome — bug reports, ideas and pull requests all count.
+Contributions are very welcome — bug reports, ideas and pull requests all count. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full guide.
 
-- Open an [issue](https://github.com/TheJhoxX/ROMGrid/issues) before starting a big change so we can agree on the approach.
-- Match the existing style (Prettier + ESLint run on every save; no comments unless the *why* is non-obvious).
-- All UI strings live in `messages/en.json` and use `useTranslations`.
-- Prefer editing existing files over creating new ones; reach for shadcn primitives before hand-rolling UI.
+## What's coming next
 
-### Adding a new Frame
+Head over to the [issues](https://github.com/TheJhoxX/ROMGrid/issues) tab to see planned work, in-progress features and open ideas. That's the source of truth for what's coming — feel free to comment on anything that interests you or open a new issue if you have something in mind.
 
-A Frame is the most useful thing you can contribute. To add one (e.g. `dsi`, `psp`, `umd`, `gamecube`):
+## Privacy
 
-1. Add the id to `CONSOLE_FRAME_STYLES` in `src/components/custom/Frame/Frame.tsx`.
-2. Write its `<Component>` using container-query units (`cqmin`) so it scales with the wrapper.
-3. If the standard export engine can't reproduce it (e.g. discs needing masks / clip-path), provide a `customExport` and register it in the `FRAMES` map.
-4. Add translations for the frame's `title` and `description` under `assetMaker.steps.customize.frames.<id>` in `messages/en.json`.
-5. Test it in the `/uikit` playground and the full flow in `/asset-maker`.
-
-## Roadmap
-
-- More Frames (DSi, PSP UMD, GameCube disc, PS1 jewel case, cartridge variants…)
-- Additional export formats and sizes
-- More languages
+ROMGrid keeps your data on your device and uses cookieless analytics only to measure aggregate usage. See [PRIVACY.md](./PRIVACY.md) for details.
 
 ## License
 
