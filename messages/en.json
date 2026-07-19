@@ -1,4 +1,10 @@
 {
+    "og": {
+        "title": "ROMGrid — ROM icon generator",
+        "description": "Generate icons for your ROMs styled like real console assets. Frame-based, batch export, runs in your browser.",
+        "tagline": "Generate icons for your ROMs styled like real console assets",
+        "imageAlt": "ROMGrid — ROM icon generator"
+    },
     "general": {
         "actions": {
             "save": "Save",

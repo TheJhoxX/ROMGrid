@@ -1,20 +1,12 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { NextIntlClientProvider } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import { HomeNavigationMenu } from './HomeNavigationMenu'
 import { Providers } from './Providers'
 import { Analytics } from '@vercel/analytics/next'
-
-const geistSans = Geist({
-    variable: '--font-sans',
-    subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-})
 
 const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -22,33 +14,41 @@ const siteUrl =
         ? `https://${process.env.VERCEL_URL}`
         : 'http://localhost:3000')
 
-const siteDescription =
-    'Generate icons for your ROMs styled like real console assets. Frame-based, batch export, runs in your browser.'
-
-export const metadata: Metadata = {
-    metadataBase: new URL(siteUrl),
-    title: 'ROMGrid',
-    description: siteDescription,
-    icons: {
-        icon: [
-            { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-            { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-        ],
-        apple: '/apple-touch-icon.png',
-    },
-    manifest: '/site.webmanifest',
-    openGraph: {
-        type: 'website',
-        url: siteUrl,
-        siteName: 'ROMGrid',
-        title: 'ROMGrid — ROM icon generator',
-        description: siteDescription,
-    },
-    twitter: {
-        card: 'summary',
-        title: 'ROMGrid — ROM icon generator',
-        description: siteDescription,
-    },
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations('og')
+    return {
+        metadataBase: new URL(siteUrl),
+        title: 'ROMGrid',
+        description: t('description'),
+        icons: {
+            icon: [
+                {
+                    url: '/favicon-16x16.png',
+                    sizes: '16x16',
+                    type: 'image/png',
+                },
+                {
+                    url: '/favicon-32x32.png',
+                    sizes: '32x32',
+                    type: 'image/png',
+                },
+            ],
+            apple: '/apple-touch-icon.png',
+        },
+        manifest: '/site.webmanifest',
+        openGraph: {
+            type: 'website',
+            url: siteUrl,
+            siteName: 'ROMGrid',
+            title: t('title'),
+            description: t('description'),
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: t('title'),
+            description: t('description'),
+        },
+    }
 }
 
 export default function RootLayout({
@@ -60,7 +60,7 @@ export default function RootLayout({
         <html
             lang='en'
             suppressHydrationWarning
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
         >
             <body className='mb-12 flex flex-col'>
                 <Providers>
