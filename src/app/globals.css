@@ -181,6 +181,9 @@
     --shadow-lg: var(--shadow-lg);
     --shadow-xl: var(--shadow-xl);
     --shadow-2xl: var(--shadow-2xl);
+
+    --animate-float: float 3s ease-in-out infinite;
+    --animate-float-shadow: float-shadow 3s ease-in-out infinite;
 }
 
 @layer base {
