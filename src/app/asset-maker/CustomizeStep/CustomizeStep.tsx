@@ -101,9 +101,7 @@ export const CustomizeStep = ({
     )
 
     const { isAtLeastMd } = useBreakpoint()
-    const [openPanel, setOpenPanel] = useState<'frames' | 'settings' | null>(
-        null,
-    )
+    const [openPanel, setOpenPanel] = useState<ToolbarOptions | null>(null)
 
     const previewCard = currentGame?.selectedIcon && (
         <Card className='flex min-w-0 grow flex-col'>
@@ -377,9 +375,7 @@ const FramesPanelBody = ({ currentGame, onUpdateConfig }: PanelBodyProps) => {
                         <button
                             className='cursor-pointer'
                             type='button'
-                            onClick={() =>
-                                onUpdateConfig('frameStyle', style)
-                            }
+                            onClick={() => onUpdateConfig('frameStyle', style)}
                         >
                             <ItemMedia>
                                 <div className='flex h-16 w-16 items-center justify-center'>
@@ -444,8 +440,6 @@ const IconPreview = ({
     gameId: number
     onPreviewClick: (gameId: number) => void
 }) => {
-    const { isAtLeastMd } = useBreakpoint()
-
     return (
         <Tooltip>
             <TooltipTrigger asChild>
@@ -461,7 +455,6 @@ const IconPreview = ({
                         alt={name}
                         className='h-full w-full object-cover'
                     />
-                    {isAtLeastMd && <p>Hola </p>}
                 </button>
             </TooltipTrigger>
             <TooltipContent>{name}</TooltipContent>

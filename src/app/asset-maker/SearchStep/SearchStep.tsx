@@ -227,6 +227,7 @@ const GamePreview = ({
             src={game.cover.thumb.toString()}
             alt={game.name + ' thumb'}
             fill
+            sizes='(max-width: 768px) 80px, (max-width: 1024px) 33vw, 25vw'
             className='object-cover'
         />
     ) : (
