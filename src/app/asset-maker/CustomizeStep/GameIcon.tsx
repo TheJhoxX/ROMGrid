@@ -12,8 +12,10 @@ type GameIconProps = {
 
 export const GameIcon = ({ game, mode }: GameIconProps) => {
     if (!game.selectedIcon) return null
-    const { backgroundColor, borderRadius, frameStyle } = game.iconAdjustment
+    const { backgroundColor, borderRadius, frameStyle, width } =
+        game.iconAdjustment
     const isPreview = mode === 'preview'
+    const sizes = isPreview ? '(max-width: 768px) 100vw, 768px' : `${width}px`
 
     return (
         <Frame
@@ -23,6 +25,7 @@ export const GameIcon = ({ game, mode }: GameIconProps) => {
                 alt: game.name,
                 backgroundColor,
                 borderRadius,
+                sizes,
                 priority: !isPreview,
                 loading: isPreview ? 'lazy' : 'eager',
             }}

@@ -119,7 +119,7 @@
                     "description": "Tweak the icon to find the perfect style",
                     "size": "Size",
                     "backgroundColor": "Background color",
-                    "borderRadius": "Icon border radius — {value}%"
+                    "borderRadius": "Border radius — {value}%"
                 },
                 "frames": {
                     "title": "Frames",
@@ -130,6 +130,10 @@
                     "3ds": {
                         "title": "Nintendo 3DS",
                         "description": "Classic Nintendo 3DS home menu style"
+                    },
+                    "dsi": {
+                        "title": "Nintendo DSi",
+                        "description": "Nintendo DSi home menu style with raised button effect"
                     }
                 },
                 "export": "Export",

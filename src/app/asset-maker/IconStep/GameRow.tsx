@@ -64,6 +64,7 @@ export const GameRow = ({
                             src={image.url.toString()}
                             alt={gameConfig.name}
                             fill
+                            sizes='(max-width: 768px) 25vw, (max-width: 1024px) 17vw, 13vw'
                             className='object-cover'
                         />
                     </button>
