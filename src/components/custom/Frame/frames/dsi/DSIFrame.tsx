@@ -18,7 +18,7 @@ export const DSIFrame: FrameComponent = ({ icon }) => (
             <div
                 className='@container relative aspect-square overflow-hidden rounded-[8%] border-[0.4cqw] border-[#C2C2C2CC]/70 bg-white'
                 style={{
-                    boxShadow: 'inset 0 0 2cqw 0.5cqw rgba(0,0,0,0.1)',
+                    boxShadow: 'inset 0 0 1cqw 0.2cqw rgba(0,0,0,0.1)',
                 }}
             >
                 <div
