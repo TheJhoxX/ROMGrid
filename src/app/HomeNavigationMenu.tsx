@@ -49,11 +49,11 @@ export const HomeNavigationMenu = () => {
                     >
                         <Image
                             src='/images/logo.svg'
-                            alt='logo'
+                            alt='ROMGrid'
                             width={32}
                             height={32}
                         />
-                        <p className='font-bold'>
+                        <p className='font-black tracking-[-0.04em]'>
                             ROM
                             <span className='from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent'>
                                 Grid
