@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">ROMGrid visual identity proposal</title>
+  <desc id="desc">A presentation board showing the simplified ROMGrid symbol, wordmark, dark mode, small sizes, and colors</desc>
+  <defs>
+    <linearGradient id="brand-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EF5378"/>
+      <stop offset="0.48" stop-color="#D7669B"/>
+      <stop offset="1" stop-color="#529AD6"/>
+    </linearGradient>
+    <linearGradient id="word-gradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#EF5378"/>
+      <stop offset="1" stop-color="#529AD6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#101724" flood-opacity="0.16"/>
+    </filter>
+    <g id="mark">
+      <rect width="512" height="512" rx="48" fill="#1F2839"/>
+      <path d="M120 64H392C423 64 448 89 448 120V392C448 423 423 448 392 448H184L64 328V120C64 89 89 64 120 64Z" fill="#FFFFFF"/>
+      <g fill="url(#brand-gradient)">
+        <rect x="120" y="120" width="120" height="120" rx="30"/>
+        <rect x="272" y="120" width="120" height="120" rx="30"/>
+        <rect x="120" y="272" width="120" height="120" rx="30"/>
+        <rect x="272" y="272" width="120" height="120" rx="30"/>
+      </g>
+    </g>
+  </defs>
+
+  <rect width="1800" height="1100" fill="#F6F7FA"/>
+  <text x="96" y="100" fill="#1F2839" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="34" font-weight="750" letter-spacing="2">ROMGRID / IDENTITY REFRESH</text>
+  <text x="96" y="148" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22">Cartridge memory. Grid logic. One clear symbol.</text>
+
+  <!-- Main mark -->
+  <g transform="translate(96 220) scale(.82)" filter="url(#shadow)">
+    <use href="#mark"/>
+  </g>
+
+  <!-- Main wordmark -->
+  <g transform="translate(620 278)">
+    <text x="0" y="150" fill="#1F2839" font-family="Geist, sans-serif" font-size="154" font-weight="900" letter-spacing="-9">ROM</text>
+    <text x="319" y="150" fill="url(#word-gradient)" font-family="Geist, sans-serif" font-size="154" font-weight="900" letter-spacing="-9">Grid</text>
+    <text x="4" y="210" fill="#667085" font-family="Geist, sans-serif" font-size="25" font-weight="700" letter-spacing="3">YOUR WHOLE LIBRARY. ONE PASS.</text>
+  </g>
+
+  <!-- Dark lockup -->
+  <rect x="96" y="700" width="900" height="270" rx="48" fill="#1F2839"/>
+  <g transform="translate(146 745) scale(.35)">
+    <use href="#mark"/>
+  </g>
+  <g transform="translate(354 760)">
+    <text x="0" y="108" fill="#FFFFFF" font-family="Geist, sans-serif" font-size="112" font-weight="900" letter-spacing="-7">ROM</text>
+    <text x="232" y="108" fill="url(#word-gradient)" font-family="Geist, sans-serif" font-size="112" font-weight="900" letter-spacing="-7">Grid</text>
+    <text x="2" y="158" fill="#C9D0DC" font-family="Geist, sans-serif" font-size="20" font-weight="700" letter-spacing="2">YOUR WHOLE LIBRARY. ONE PASS.</text>
+  </g>
+
+  <!-- Small-size test -->
+  <text x="1070" y="735" fill="#1F2839" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22" font-weight="700" letter-spacing="2">SMALL-SIZE TEST</text>
+  <g transform="translate(1070 780) scale(.25)"><use href="#mark"/></g>
+  <g transform="translate(1230 812) scale(.125)"><use href="#mark"/></g>
+  <g transform="translate(1326 828) scale(.0625)"><use href="#mark"/></g>
+  <text x="1070" y="940" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="19">128 px</text>
+  <text x="1230" y="940" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="19">64 px</text>
+  <text x="1326" y="940" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="19">32 px</text>
+
+  <!-- Palette -->
+  <g transform="translate(1320 230)">
+    <text x="0" y="0" fill="#1F2839" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22" font-weight="700" letter-spacing="2">CORE PALETTE</text>
+    <rect x="0" y="40" width="130" height="130" rx="30" fill="#1F2839"/>
+    <rect x="150" y="40" width="130" height="130" rx="30" fill="#EF5378"/>
+    <rect x="300" y="40" width="130" height="130" rx="30" fill="#529AD6"/>
+    <text x="0" y="202" fill="#667085" font-family="monospace" font-size="18">#1F2839</text>
+    <text x="150" y="202" fill="#667085" font-family="monospace" font-size="18">#EF5378</text>
+    <text x="300" y="202" fill="#667085" font-family="monospace" font-size="18">#529AD6</text>
+  </g>
+
+  <g transform="translate(1320 510)">
+    <text x="0" y="0" fill="#1F2839" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22" font-weight="700" letter-spacing="2">DESIGN PRINCIPLE</text>
+    <text x="0" y="55" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22">No text inside the app icon.</text>
+    <text x="0" y="92" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22">One silhouette at every size.</text>
+    <text x="0" y="129" fill="#667085" font-family="Geist, Inter, 'Noto Sans', sans-serif" font-size="22">The grid is the product promise.</text>
+  </g>
+</svg>
