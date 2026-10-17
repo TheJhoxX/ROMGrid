@@ -4,8 +4,8 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
-import { HomeNavigationMenu } from './HomeNavigationMenu'
-import { Providers } from './Providers'
+import { HomeNavigationMenu } from '@/components/layout/HomeNavigationMenu'
+import { Providers } from '@/components/Providers'
 import { Analytics } from '@vercel/analytics/next'
 
 const siteUrl =
