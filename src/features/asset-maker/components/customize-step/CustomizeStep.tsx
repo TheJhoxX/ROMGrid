@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { IconEditor } from '@/features/icon-editor/IconEditor'
-import type { IconAdjustment } from '@/features/icon-editor/types'
-import type { GameConfig } from '../../types'
+import { useAssetMaker } from '../../AssetMakerContext'
 import { getIconUrl } from '../../getIconUrl'
 import {
     Tooltip,
@@ -10,19 +9,8 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-export type CustomizeStepProps = {
-    selectedGames: Map<number, GameConfig>
-    onUpdateIconAdjustment: <K extends keyof IconAdjustment>(
-        gameId: number,
-        key: K,
-        value: IconAdjustment[K],
-    ) => void
-}
-
-export const CustomizeStep = ({
-    selectedGames,
-    onUpdateIconAdjustment,
-}: CustomizeStepProps) => {
+export const CustomizeStep = () => {
+    const { selectedGames, handleUpdateIconAdjustment } = useAssetMaker()
     const [selectedGameId, setSelectedGameId] = useState<number | undefined>(
         () => selectedGames.keys().next().value,
     )
@@ -58,7 +46,7 @@ export const CustomizeStep = ({
                     alt={currentGame.name}
                     adjustment={currentGame.iconAdjustment}
                     onUpdateAdjustment={(key, value) =>
-                        onUpdateIconAdjustment(currentGameId, key, value)
+                        handleUpdateIconAdjustment(currentGameId, key, value)
                     }
                 />
             )}

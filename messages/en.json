@@ -71,6 +71,16 @@
         },
         "copyright": "2026 ROMGrid. All rights reserved."
     },
+    "imageStudio": {
+        "title": "Image Studio",
+        "description": "Customize and export an image with or without artwork.",
+        "addImage": "Add image (optional)",
+        "replaceImage": "Replace image",
+        "removeImage": "Remove image",
+        "export": "Export PNG",
+        "exporting": "Exporting…",
+        "exportError": "Could not export the image. Please try again."
+    },
     "assetMaker": {
         "continueButtonLabel": "Continue",
         "steps": {

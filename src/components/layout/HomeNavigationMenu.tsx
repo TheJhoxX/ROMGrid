@@ -1,5 +1,11 @@
 'use client'
-import { PencilRuler, Settings } from 'lucide-react'
+
+import Image from 'next/image'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { PencilRuler, Settings, Images } from 'lucide-react'
+import { ThemeSelector } from './ThemeSelector'
+import { usePathname } from 'next/navigation'
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -7,17 +13,11 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { ThemeSelector } from './ThemeSelector'
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
-import Image from 'next/image'
-import { ImagePlus } from 'lucide-react'
 
 type NavigationMenuItemType = {
     title: string
@@ -27,9 +27,9 @@ type NavigationMenuItemType = {
 
 const navigationMenuItems: NavigationMenuItemType[] = [
     {
-        title: 'Image Builder',
-        href: '/asset-maker/ImageBuilder',
-        icon: <ImagePlus />,
+        title: 'Image Studio',
+        href: '/asset-maker/image-studio',
+        icon: <Images />,
     },
     {
         title: 'Asset maker',

@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { useTranslations } from 'next-intl'
 import { STEP_ACTIONS, STEP_ORDER } from '../steps'
-import type { AssetMakerStep } from '../types'
+import { useAssetMaker } from '../AssetMakerContext'
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -13,18 +13,15 @@ import {
 import { Button } from '@/components/ui/button'
 
 type AssetMakerHeaderProps = {
-    currentStep: AssetMakerStep
     disabled: boolean
-    onChangeStep: (step: AssetMakerStep) => void
     onAction: () => void
 }
 
 export const AssetMakerHeader = ({
-    currentStep,
     disabled,
-    onChangeStep,
     onAction,
 }: AssetMakerHeaderProps) => {
+    const { currentStep, handleChangeStep } = useAssetMaker()
     const t = useTranslations('assetMaker')
     const description = t(`steps.${currentStep}.description`)
     const currentIndex = STEP_ORDER.indexOf(currentStep)
@@ -55,7 +52,7 @@ export const AssetMakerHeader = ({
                                                     type='button'
                                                     className='cursor-pointer'
                                                     onClick={() =>
-                                                        onChangeStep(step)
+                                                        handleChangeStep(step)
                                                     }
                                                 >
                                                     {label}
@@ -82,7 +79,7 @@ export const AssetMakerHeader = ({
                     className='text-primary-foreground cursor-pointer'
                 >
                     {t(action.labelKey)}
-                    <ActionIcon />
+                    <ActionIcon data-icon='inline-end' />
                 </Button>
             </div>
             <p className='text-muted-foreground w-full text-xs'>

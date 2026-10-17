@@ -16,6 +16,7 @@ export function Providers({
             defaultTheme='system'
             enableSystem
             disableTransitionOnChange
+            scriptProps={{ type: 'application/json' }}
         >
             <QueryClientProvider client={queryClient}>
                 <TooltipProvider>{children}</TooltipProvider>

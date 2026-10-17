@@ -6,6 +6,7 @@ export type IconAdjustment = {
     borderRadius: number
     width: number
     height: number
+    fit: 'cover' | 'contain' | 'fill' | 'scale-down'
 }
 
 export type UpdateIconAdjustment = <K extends keyof IconAdjustment>(

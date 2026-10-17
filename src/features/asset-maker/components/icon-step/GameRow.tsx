@@ -1,5 +1,5 @@
 import { useSgdbIcons } from '@/lib/sgdb/useSgdbIcons'
-import type { GameConfig, SelectedIcon } from '../../types'
+import { useAssetMaker } from '../../AssetMakerContext'
 import Image from 'next/image'
 import { CustomImageUpload } from './CustomImageUpload'
 import { cn } from '@/lib/utils'
@@ -11,17 +11,11 @@ import { Button } from '@/components/ui/button'
 
 export type GameRowProps = {
     gameId: number
-    gameConfig: GameConfig
-    onSelectIcon: (icon: SelectedIcon) => void
-    onClearIcon: () => void
 }
 
-export const GameRow = ({
-    gameId,
-    gameConfig,
-    onSelectIcon,
-    onClearIcon,
-}: GameRowProps) => {
+export const GameRow = ({ gameId }: GameRowProps) => {
+    const { selectedGames, handleSelectIcon, handleClearIcon } = useAssetMaker()
+    const gameConfig = selectedGames.get(gameId)!
     const { icons, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } =
         useSgdbIcons({ gameId })
     const t = useTranslations('assetMaker.steps.icon')
@@ -40,10 +34,10 @@ export const GameRow = ({
                     isSelected={gameConfig.selectedIcon?.kind === 'custom'}
                     onChangeUrl={(url) => {
                         if (!url) {
-                            onClearIcon()
+                            handleClearIcon(gameId)
                             return
                         }
-                        onSelectIcon({ kind: 'custom', url })
+                        handleSelectIcon(gameId, { kind: 'custom', url })
                     }}
                     previewUrl={
                         gameConfig.selectedIcon?.kind === 'custom'
@@ -54,7 +48,9 @@ export const GameRow = ({
                 {icons.map((image) => (
                     <button
                         key={image.id}
-                        onClick={() => onSelectIcon({ kind: 'sgdb', image })}
+                        onClick={() =>
+                            handleSelectIcon(gameId, { kind: 'sgdb', image })
+                        }
                         className={cn(
                             'hover:ring-primary bg-muted relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg shadow-md ring-2 ring-transparent transition-all duration-300',
                             isSelected(image) && 'ring-primary shadow-primary',
@@ -108,7 +104,7 @@ export const GameRow = ({
                         )}
                     </div>
                 ) : (
-                    <div className='inline-flex'>
+                    <div className='inline-flex items-center gap-2'>
                         {tActions('loading')}
                         <Spinner />
                     </div>

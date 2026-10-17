@@ -12,6 +12,7 @@ export const IconLayer = ({ icon }: { icon: FrameIcon }) => {
         loading,
         sizes,
     } = icon
+
     return (
         <div
             className='absolute inset-0 overflow-hidden'
@@ -21,15 +22,18 @@ export const IconLayer = ({ icon }: { icon: FrameIcon }) => {
                 className='absolute inset-0'
                 style={{ backgroundColor }}
             />
-            <Image
-                src={src}
-                alt={alt}
-                fill
-                sizes={sizes}
-                priority={priority}
-                loading={loading}
-                className='object-cover'
-            />
+            {src && (
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    sizes={sizes}
+                    priority={priority}
+                    loading={loading}
+                    objectFit={icon.fit}
+                    className='object-cover'
+                />
+            )}
         </div>
     )
 }

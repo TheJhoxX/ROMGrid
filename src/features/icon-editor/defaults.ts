@@ -6,4 +6,5 @@ export const DEFAULT_ICON_ADJUSTMENT: IconAdjustment = {
     borderRadius: 0,
     width: 512,
     height: 512,
+    fit: 'cover',
 }

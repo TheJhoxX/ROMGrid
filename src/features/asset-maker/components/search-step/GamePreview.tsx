@@ -14,18 +14,15 @@ import { BadgeCheck, Calendar, ImageOff } from 'lucide-react'
 import Image from 'next/image'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
 import { useTranslations } from 'next-intl'
+import { useAssetMaker } from '../../AssetMakerContext'
 
 type GamePreviewProps = {
     game: SGDBGameWithCover
-    isGameSelected: boolean
-    onGameClick: (gameId: number, gameName: string) => void
 }
 
-export const GamePreview = ({
-    game,
-    isGameSelected,
-    onGameClick,
-}: GamePreviewProps) => {
+export const GamePreview = ({ game }: GamePreviewProps) => {
+    const { selectedGames, handleFirstStepGameClick } = useAssetMaker()
+    const isGameSelected = selectedGames.has(game.id)
     const t = useTranslations('assetMaker.steps.search')
     const { isAtLeastMd } = useBreakpoint()
 
@@ -46,7 +43,7 @@ export const GamePreview = ({
     if (!isAtLeastMd) {
         return (
             <button
-                onClick={() => onGameClick(game.id, game.name)}
+                onClick={() => handleFirstStepGameClick(game.id, game.name)}
                 className='h-full w-full cursor-pointer text-left'
             >
                 <Item
@@ -92,7 +89,7 @@ export const GamePreview = ({
 
     return (
         <button
-            onClick={() => onGameClick(game.id, game.name)}
+            onClick={() => handleFirstStepGameClick(game.id, game.name)}
             className='h-full w-full cursor-pointer'
         >
             <Item

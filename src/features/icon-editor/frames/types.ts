@@ -5,13 +5,14 @@ export const CONSOLE_FRAME_STYLES = ['none', '3ds', 'dsi'] as const
 export type ConsoleFrameStyle = (typeof CONSOLE_FRAME_STYLES)[number]
 
 export type FrameIcon = {
-    src: string
+    src: string | null
     alt: string
     backgroundColor: string
     borderRadius: number
     priority?: boolean
     loading?: 'lazy' | 'eager'
     sizes?: string
+    fit: 'cover' | 'contain' | 'fill' | 'scale-down'
 } | null
 
 export type FrameComponent = FC<{ icon: FrameIcon }>

@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/empty'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce'
-import type { GameConfig } from '../../types'
+import { useAssetMaker } from '../../AssetMakerContext'
 import { useTranslations } from 'next-intl'
 import { Spinner } from '@/components/ui/spinner'
 
@@ -52,19 +52,11 @@ const SEARCH_STATUS_MAP: Record<
     },
 }
 
-export type SearchStepProps = {
-    onGameClick: (gameId: number, gameName: string) => void
-    onClearGames: () => void
-    selectedGames: Map<number, GameConfig>
-}
-
 const MAX_GAME_CHIPS_AMMOUNT = 5
 
-export const SearchStep = ({
-    onGameClick,
-    onClearGames,
-    selectedGames,
-}: SearchStepProps) => {
+export const SearchStep = () => {
+    const { selectedGames, handleFirstStepGameClick, handleClearGames } =
+        useAssetMaker()
     const [query, setGameQuery] = useState<string>('')
     const [debouncedQuery] = useDebounce(query, DEBOUNCE_DELAY)
     const { data: games, isFetching } = useSGDBSearch({
@@ -91,7 +83,7 @@ export const SearchStep = ({
                                             {gameConfig.name}
                                             <button
                                                 onClick={() =>
-                                                    onGameClick(
+                                                    handleFirstStepGameClick(
                                                         gameId,
                                                         gameConfig.name,
                                                     )
@@ -110,7 +102,7 @@ export const SearchStep = ({
                                         gamesAmount: selectedGames.size,
                                     })}
                                     <button
-                                        onClick={onClearGames}
+                                        onClick={handleClearGames}
                                         className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
                                         aria-label={`Remove all`}
                                     >
@@ -121,7 +113,7 @@ export const SearchStep = ({
                         </div>
                         <Button
                             size='xs'
-                            onClick={onClearGames}
+                            onClick={handleClearGames}
                             title={t('clearGames')}
                             variant='secondary'
                             className='cursor-pointer!'
@@ -159,8 +151,6 @@ export const SearchStep = ({
                                 <GamePreview
                                     key={game.id}
                                     game={game}
-                                    isGameSelected={selectedGames.has(game.id)}
-                                    onGameClick={onGameClick}
                                 />
                             ))}
                         </div>

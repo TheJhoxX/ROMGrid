@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import type { IconPanelProps } from '../types'
+import type { IconAdjustment, IconPanelProps } from '../types'
 import {
     Card,
     CardContent,
@@ -16,6 +16,7 @@ import {
     InputGroupAddon,
     InputGroupInput,
 } from '@/components/ui/input-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
 export const SettingsPanelBody = ({
     adjustment,
@@ -31,13 +32,13 @@ export const SettingsPanelBody = ({
                         type='text'
                         value={adjustment.width}
                         aria-invalid={
-                            isNaN(adjustment.width) ||
+                            Number.isNaN(adjustment.width) ||
                             adjustment.width < 16 ||
                             adjustment.width > 1024
                         }
                         onChange={(e) => {
                             const val = Number(e.target.value)
-                            if (!isNaN(val)) {
+                            if (!Number.isNaN(val)) {
                                 onUpdateAdjustment('width', val)
                                 onUpdateAdjustment('height', val)
                             }
@@ -70,6 +71,45 @@ export const SettingsPanelBody = ({
                         onUpdateAdjustment('borderRadius', val)
                     }
                 />
+            </Field>
+            <Field>
+                <FieldLabel>Image fit</FieldLabel>
+                <ToggleGroup
+                    type='single'
+                    spacing={1}
+                    defaultValue={adjustment.fit}
+                    onValueChange={(value) => {
+                        onUpdateAdjustment(
+                            'fit',
+                            value as IconAdjustment['fit'],
+                        )
+                    }}
+                >
+                    <ToggleGroupItem
+                        value='contain'
+                        aria-label='Contain'
+                    >
+                        Contain
+                    </ToggleGroupItem>
+                    <ToggleGroupItem
+                        value='cover'
+                        aria-label='Cover'
+                    >
+                        Cover
+                    </ToggleGroupItem>
+                    <ToggleGroupItem
+                        value='fill'
+                        aria-label='Fill'
+                    >
+                        Fill
+                    </ToggleGroupItem>
+                    <ToggleGroupItem
+                        value='scale-down'
+                        aria-label='Scale down'
+                    >
+                        Scale down
+                    </ToggleGroupItem>
+                </ToggleGroup>
             </Field>
         </FieldGroup>
     )

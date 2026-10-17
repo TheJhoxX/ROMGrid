@@ -6,21 +6,20 @@ import { CustomizeStep } from './components/customize-step/CustomizeStep'
 import { AssetMakerHeader } from './components/AssetMakerHeader'
 import { ExportProgressDialog } from './components/ExportProgressDialog'
 import { ExportIcons } from './components/ExportIcons'
-import { useAssetMaker } from './hooks/useAssetMaker'
+import { AssetMakerProvider, useAssetMaker } from './AssetMakerContext'
 import { useAssetExport } from './hooks/useAssetExport'
 import { STEP_ACTIONS, STEP_ORDER } from './steps'
 
 export default function AssetMaker() {
-    const {
-        currentStep,
-        selectedGames,
-        handleFirstStepGameClick,
-        handleSelectIcon,
-        handleClearGames,
-        handleClearIcon,
-        handleUpdateIconAdjustment,
-        handleChangeStep,
-    } = useAssetMaker()
+    return (
+        <AssetMakerProvider>
+            <AssetMakerContent />
+        </AssetMakerProvider>
+    )
+}
+
+function AssetMakerContent() {
+    const { currentStep, selectedGames, handleChangeStep } = useAssetMaker()
     const {
         exportNodes,
         exportState,
@@ -39,30 +38,13 @@ export default function AssetMaker() {
 
     const content = () => {
         if (currentStep === 'search') {
-            return (
-                <SearchStep
-                    onGameClick={handleFirstStepGameClick}
-                    selectedGames={selectedGames}
-                    onClearGames={handleClearGames}
-                />
-            )
+            return <SearchStep />
         }
         if (currentStep === 'icon') {
-            return (
-                <IconStep
-                    selectedGames={selectedGames}
-                    onSelectIcon={handleSelectIcon}
-                    onClearIcon={handleClearIcon}
-                />
-            )
+            return <IconStep />
         }
         if (currentStep === 'customize') {
-            return (
-                <CustomizeStep
-                    selectedGames={selectedGames}
-                    onUpdateIconAdjustment={handleUpdateIconAdjustment}
-                />
-            )
+            return <CustomizeStep />
         }
     }
 
@@ -70,12 +52,10 @@ export default function AssetMaker() {
         <div className='flex w-full flex-col items-center gap-2'>
             <div className='bg-background sticky top-13.5 z-20 flex w-full flex-col gap-2 px-6 py-3'>
                 <AssetMakerHeader
-                    currentStep={currentStep}
                     disabled={
                         !STEP_ACTIONS[currentStep].canRun(selectedGames) ||
                         exportState.active
                     }
-                    onChangeStep={handleChangeStep}
                     onAction={handleAction}
                 />
             </div>

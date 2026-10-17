@@ -7,6 +7,7 @@ import { getTranslations } from 'next-intl/server'
 import { HomeNavigationMenu } from '@/components/layout/HomeNavigationMenu'
 import { Providers } from '@/components/Providers'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 
 const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -63,6 +64,17 @@ export default function RootLayout({
             className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
         >
             <body className='mb-12 flex flex-col'>
+                <Script
+                    id='theme-init'
+                    strategy='beforeInteractive'
+                >
+                    {`try {
+                        const theme = localStorage.getItem('theme') || 'system';
+                        const dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+                        document.documentElement.classList.toggle('dark', dark);
+                        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+                    } catch {}`}
+                </Script>
                 <Providers>
                     <NextIntlClientProvider>
                         <HomeNavigationMenu />

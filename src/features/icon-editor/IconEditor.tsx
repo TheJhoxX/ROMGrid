@@ -25,7 +25,7 @@ export const IconEditor = ({
     alt,
     adjustment,
     onUpdateAdjustment,
-}: IconPanelProps & { src: string; alt: string }) => {
+}: IconPanelProps & { src: string | null; alt: string }) => {
     const t = useTranslations('assetMaker.steps.customize')
     const { isAtLeastMd } = useBreakpoint()
     const [openPanel, setOpenPanel] = useState<EditorPanel | null>(null)

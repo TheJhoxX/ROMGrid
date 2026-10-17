@@ -5,7 +5,7 @@ import { DEFAULT_ICON_ADJUSTMENT } from '@/features/icon-editor/defaults'
 import type { IconAdjustment } from '@/features/icon-editor/types'
 import type { AssetMakerStep, GameConfig, SelectedIcon } from '../types'
 
-export function useAssetMaker() {
+export function useAssetMakerState() {
     const [currentStep, setCurrentStep] = useState<AssetMakerStep>('search')
     const [selectedGames, setSelectedGames] = useState<Map<number, GameConfig>>(
         new Map(),
