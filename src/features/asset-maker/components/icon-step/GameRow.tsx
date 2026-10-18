@@ -72,9 +72,9 @@ export const GameRow = ({ gameId }: GameRowProps) => {
     return (
         <div className='flex w-full flex-col gap-4 py-6 first:pt-0 last:pb-0 md:flex-row'>
             <div className='flex min-w-0 flex-1 flex-col gap-4'>
-                <h1 className='truncate text-2xl font-bold md:text-3xl'>
+                <h2 className='truncate text-2xl font-bold md:text-3xl'>
                     {gameConfig.name}
-                </h1>
+                </h2>
                 <div className='grid grid-cols-4 gap-4 md:grid-cols-6 lg:grid-cols-8'>
                     {renderGrid()}
                 </div>

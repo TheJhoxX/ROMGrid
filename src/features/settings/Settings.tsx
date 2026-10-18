@@ -35,8 +35,13 @@ export const SettingsPage = () => {
     }, [isEditing, setSgdbKey, inputValue, sgdbKey])
 
     return (
-        <div className='flex flex-col gap-4 p-4'>
-            <h1 className='text-3xl font-bold'>Scrappers</h1>
+        <main className='flex flex-col gap-6 px-6 py-6'>
+            <header>
+                <h1 className='text-2xl font-bold'>{t('settings.title')}</h1>
+                <p className='text-muted-foreground text-sm'>
+                    {t('settings.description')}
+                </p>
+            </header>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
                 <Card>
                     <CardHeader>
@@ -88,7 +93,7 @@ export const SettingsPage = () => {
                     </CardFooter>
                 </Card>
             </div>
-        </div>
+        </main>
     )
 }
 

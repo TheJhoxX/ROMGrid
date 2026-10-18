@@ -37,7 +37,7 @@ export default function Home() {
     )
 
     return (
-        <div className='mt-12'>
+        <main className='mt-12'>
             <div className='relative flex w-full flex-col items-center justify-center'>
                 <TunnelGrid className='absolute inset-0 h-full w-full' />
                 <div className='relative z-10 flex flex-col justify-center'>
@@ -47,7 +47,13 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='mb-4 grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-2'>
+            <header className='px-6 pt-6'>
+                <h1 className='text-2xl font-bold'>{t('title')}</h1>
+                <p className='text-muted-foreground text-sm'>
+                    {t('description')}
+                </p>
+            </header>
+            <div className='mb-4 grid grid-cols-1 gap-6 px-6 py-4 md:grid-cols-2 lg:grid-cols-2'>
                 {/* What is ROMGrid? */}
                 <Card className='transition-all duration-300 ease-in-out hover:-translate-y-1.5'>
                     <CardHeader>
@@ -150,6 +156,6 @@ export default function Home() {
                 <Copyright className='h-4 w-4' />
                 <p>{t('copyright')}</p>
             </div>
-        </div>
+        </main>
     )
 }

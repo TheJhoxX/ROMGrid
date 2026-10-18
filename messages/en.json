@@ -25,6 +25,8 @@
         }
     },
     "home": {
+        "title": "ROMGrid",
+        "description": "Generate icons for your ROMs styled like real console assets.",
         "betaBadge": "beta",
         "whatIs": {
             "title": "What is ROMGrid?",
@@ -82,6 +84,8 @@
         "exportError": "Could not export the image. Please try again."
     },
     "assetMaker": {
+        "title": "Asset Maker",
+        "description": "Find games, choose artwork, and export custom icons in a batch.",
         "continueButtonLabel": "Continue",
         "steps": {
             "search": {
@@ -168,6 +172,8 @@
         }
     },
     "settings": {
+        "title": "Settings",
+        "description": "Configure the services used to find game details and artwork.",
         "sgdb": {
             "title": "SteamGridDB",
             "description": "Set up your SteamGridDB API Key to enable fetching of game metadata and images from SteamGridDB. You can find your API key inyour SteamGridDB account settings"

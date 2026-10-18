@@ -55,7 +55,7 @@ export default function ImageStudio() {
 
     return (
         <main className='flex w-full flex-col gap-6 px-6 py-6'>
-            <div className='flex flex-wrap items-center justify-between gap-4'>
+            <header className='flex flex-wrap items-center justify-between gap-4'>
                 <div>
                     <h1 className='text-2xl font-bold'>{t('title')}</h1>
                     <p className='text-muted-foreground text-sm'>
@@ -73,7 +73,7 @@ export default function ImageStudio() {
                     <Download data-icon='inline-start' />
                     {isExporting ? t('exporting') : t('export')}
                 </Button>
-            </div>
+            </header>
 
             <div className='flex flex-wrap items-center gap-2'>
                 <Button

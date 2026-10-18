@@ -9,6 +9,7 @@ import { ExportIcons } from './components/ExportIcons'
 import { AssetMakerProvider, useAssetMaker } from './AssetMakerContext'
 import { useAssetExport } from './hooks/useAssetExport'
 import { STEP_ACTIONS, STEP_ORDER } from './steps'
+import { useTranslations } from 'next-intl'
 
 export default function AssetMaker() {
     return (
@@ -19,6 +20,7 @@ export default function AssetMaker() {
 }
 
 function AssetMakerContent() {
+    const t = useTranslations('assetMaker')
     const { currentStep, selectedGames, handleChangeStep } = useAssetMaker()
     const {
         exportNodes,
@@ -49,7 +51,13 @@ function AssetMakerContent() {
     }
 
     return (
-        <div className='flex w-full flex-col items-center gap-2'>
+        <main className='flex w-full flex-col items-center gap-2'>
+            <header className='w-full px-6 pt-6'>
+                <h1 className='text-2xl font-bold'>{t('title')}</h1>
+                <p className='text-muted-foreground text-sm'>
+                    {t('description')}
+                </p>
+            </header>
             <div className='bg-background sticky top-13.5 z-20 flex w-full flex-col gap-2 px-6 py-3'>
                 <AssetMakerHeader
                     disabled={
@@ -68,6 +76,6 @@ function AssetMakerContent() {
                 selectedGames={selectedGames}
                 exportNodes={exportNodes}
             />
-        </div>
+        </main>
     )
 }
