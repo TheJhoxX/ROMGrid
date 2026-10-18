@@ -1,0 +1,115 @@
+import { useSgdbIcons } from '@/lib/sgdb/useSgdbIcons'
+import { useAssetMaker } from '../../AssetMakerContext'
+import Image from 'next/image'
+import { CustomImageUpload } from './CustomImageUpload'
+import { cn } from '@/lib/utils'
+import type { SGDBImage } from 'steamgriddb'
+import { CloudDownload } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Spinner } from '@/components/ui/spinner'
+import { Button } from '@/components/ui/button'
+
+export type GameRowProps = {
+    gameId: number
+}
+
+export const GameRow = ({ gameId }: GameRowProps) => {
+    const { selectedGames, handleSelectIcon, handleClearIcon } = useAssetMaker()
+    const gameConfig = selectedGames.get(gameId)!
+    const { icons, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } =
+        useSgdbIcons({ gameId })
+    const t = useTranslations('assetMaker.steps.icon')
+    const tActions = useTranslations('general.actions')
+
+    const isSelected = (image: SGDBImage) =>
+        gameConfig.selectedIcon?.kind === 'sgdb' &&
+        gameConfig.selectedIcon.image.id === image.id
+
+    const renderGrid = () => {
+        if (isLoading) return null
+
+        return (
+            <>
+                <CustomImageUpload
+                    isSelected={gameConfig.selectedIcon?.kind === 'custom'}
+                    onChangeUrl={(url) => {
+                        if (!url) {
+                            handleClearIcon(gameId)
+                            return
+                        }
+                        handleSelectIcon(gameId, { kind: 'custom', url })
+                    }}
+                    previewUrl={
+                        gameConfig.selectedIcon?.kind === 'custom'
+                            ? gameConfig.selectedIcon.url
+                            : null
+                    }
+                />
+                {icons.map((image) => (
+                    <button
+                        key={image.id}
+                        onClick={() =>
+                            handleSelectIcon(gameId, { kind: 'sgdb', image })
+                        }
+                        className={cn(
+                            'hover:ring-primary bg-muted relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg shadow-md ring-2 ring-transparent transition-all duration-300',
+                            isSelected(image) && 'ring-primary shadow-primary',
+                        )}
+                    >
+                        <Image
+                            src={image.url.toString()}
+                            alt={gameConfig.name}
+                            fill
+                            sizes='(max-width: 768px) 25vw, (max-width: 1024px) 17vw, 13vw'
+                            className='object-cover'
+                        />
+                    </button>
+                ))}
+            </>
+        )
+    }
+
+    return (
+        <div className='flex w-full flex-col gap-4 py-6 first:pt-0 last:pb-0 md:flex-row'>
+            <div className='flex min-w-0 flex-1 flex-col gap-4'>
+                <h2 className='truncate text-2xl font-bold md:text-3xl'>
+                    {gameConfig.name}
+                </h2>
+                <div className='grid grid-cols-4 gap-4 md:grid-cols-6 lg:grid-cols-8'>
+                    {renderGrid()}
+                </div>
+                {!isLoading ? (
+                    <div className='flex items-center justify-center'>
+                        {hasNextPage ? (
+                            <Button
+                                onClick={() => fetchNextPage()}
+                                disabled={isFetchingNextPage}
+                                className='w-fit'
+                            >
+                                {isFetchingNextPage ? (
+                                    <Spinner data-icon='inline-start' />
+                                ) : (
+                                    <CloudDownload data-icon='inline-start' />
+                                )}
+                                <span className='text-xs font-medium'>
+                                    {tActions('loadMore')}
+                                </span>
+                            </Button>
+                        ) : (
+                            <div className='text-muted-foreground text-center text-xs'>
+                                {icons.length === 0
+                                    ? t('noIconsToLoad')
+                                    : t('noMoreIcons')}
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className='inline-flex items-center gap-2'>
+                        {tActions('loading')}
+                        <Spinner />
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}

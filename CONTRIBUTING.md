@@ -31,13 +31,23 @@ These are conventions the codebase already follows. We strongly recommend sticki
 - **Don't inject HTML into translations.** Compose in JSX instead (`{t('intro')} <strong>{t('term')}</strong>`). It's safer and keeps translations plain text.
 - **Match the existing style.** Prettier + ESLint run on save; `pnpm lint` and `pnpm typecheck` should pass before pushing.
 
+## Frontend organization
+
+- `src/app/`: Next.js routes, layouts, metadata, and API handlers. Page files delegate to feature screens.
+- `src/features/`: UI and state grouped by functionality (`home`, `settings`, `asset-maker`, `icon-editor`). Keep feature-specific components and hooks beside their screen.
+- `src/features/icon-editor/`: the shared editor, image renderer, adjustments, frames, and PNG export engine. It accepts image URLs and does not depend on games or SteamGridDB.
+- `src/components/`: shared application components; `ui/` contains the shadcn primitives and `layout/` contains navigation and theme controls.
+- `src/hooks/`: general browser hooks. SteamGridDB hooks, API-key storage, and types live together in `src/lib/sgdb/`.
+
+Import domain types from their feature's `types.ts`, never from a route's `page.tsx`. The asset-maker owns game selection and ZIP export; the icon editor owns image presentation and adjustment controls.
+
 ## Adding a new Frame
 
 Frames are the highest-value contribution. To add one (`dsi`, `psp`, `umd`, `gamecube`, etc.):
 
-1. Add the id to `CONSOLE_FRAME_STYLES` in `src/components/custom/Frame/Frame.tsx`.
-2. Write its `<Component>` using container-query units (`cqmin`, `cqw`, `cqh`) so it scales with the wrapper. Reference `ThreeDSFrame` in the same file.
-3. Register the frame in the `FRAMES` map. If the standard export engine (`modern-screenshot`) can't reproduce it (e.g. discs needing masks / clip-path), provide a `customExport` in the registration.
+1. Add the id to `CONSOLE_FRAME_STYLES` in `src/features/icon-editor/frames/types.ts`.
+2. Write its `<Component>` using container-query units (`cqmin`, `cqw`, `cqh`) so it scales with the wrapper. Reference `ThreeDSFrame` in `src/features/icon-editor/frames/ThreeDSFrame.tsx`.
+3. Register the frame in the `FRAMES` map in `src/features/icon-editor/frames/Frame.tsx`. If the standard export engine (`modern-screenshot`) can't reproduce it (e.g. discs needing masks / clip-path), provide a `customExport` in the registration.
 4. Add translations under `assetMaker.steps.customize.frames.<id>.title` and `.description` in `messages/en.json`.
 5. Verify it in `/uikit` (standalone playground) and in `/asset-maker` (full flow, including batch export).
 

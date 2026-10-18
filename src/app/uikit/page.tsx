@@ -1,5 +1,8 @@
 import { getTranslations } from 'next-intl/server'
-import { CONSOLE_FRAME_STYLES, Frame } from '@/components/custom/Frame/Frame'
+import {
+    CONSOLE_FRAME_STYLES,
+    Frame,
+} from '@/features/icon-editor/frames/Frame'
 
 const UiKitPage = async () => {
     const t = await getTranslations('assetMaker.steps.customize.frames')
@@ -27,6 +30,7 @@ const UiKitPage = async () => {
                                 alt: '',
                                 backgroundColor: 'transparent',
                                 borderRadius: 0,
+                                fit: 'cover',
                             }}
                         />
                     </div>

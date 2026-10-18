@@ -25,6 +25,8 @@
         }
     },
     "home": {
+        "title": "ROMGrid",
+        "description": "Generate icons for your ROMs styled like real console assets.",
         "betaBadge": "beta",
         "whatIs": {
             "title": "What is ROMGrid?",
@@ -71,7 +73,23 @@
         },
         "copyright": "2026 ROMGrid. All rights reserved."
     },
+    "imageStudio": {
+        "title": "Image Studio",
+        "description": "Customize an image with console frames and export it as a PNG.",
+        "artworkTitle": "Artwork",
+        "noImage": "No image uploaded. Add one to enable export.",
+        "imageReady": "Image uploaded and ready to customize.",
+        "uploadedImageAlt": "Uploaded artwork preview",
+        "addImage": "Add image",
+        "replaceImage": "Replace image",
+        "removeImage": "Remove image",
+        "export": "Export PNG",
+        "exporting": "Exporting…",
+        "exportError": "Could not export the image. Please try again."
+    },
     "assetMaker": {
+        "title": "Asset Maker",
+        "description": "Find games, choose artwork, and export custom icons in a batch.",
         "continueButtonLabel": "Continue",
         "steps": {
             "search": {
@@ -119,7 +137,14 @@
                     "description": "Tweak the icon to find the perfect style",
                     "size": "Size",
                     "backgroundColor": "Background color",
-                    "borderRadius": "Border radius — {value}%"
+                    "borderRadius": "Border radius — {value}%",
+                    "fit": {
+                        "title": "Image fit",
+                        "contain": "Contain",
+                        "cover": "Cover",
+                        "fill": "Fill",
+                        "scaleDown": "Scale down"
+                    }
                 },
                 "frames": {
                     "title": "Frames",
@@ -151,6 +176,8 @@
         }
     },
     "settings": {
+        "title": "Settings",
+        "description": "Configure the services used to find game details and artwork.",
         "sgdb": {
             "title": "SteamGridDB",
             "description": "Set up your SteamGridDB API Key to enable fetching of game metadata and images from SteamGridDB. You can find your API key inyour SteamGridDB account settings"
