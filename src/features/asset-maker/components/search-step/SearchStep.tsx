@@ -78,36 +78,42 @@ export const SearchStep = () => {
                                     ([gameId, gameConfig]) => (
                                         <Badge
                                             key={gameId}
-                                            className='bg-primary/10 text-primary border-primary/30 gap-1 border pr-1 font-medium'
+                                            variant='secondary'
+                                            className='h-6 gap-1 pr-0.5'
                                         >
                                             {gameConfig.name}
-                                            <button
+                                            <Button
+                                                variant='ghost'
+                                                size='icon-xs'
                                                 onClick={() =>
                                                     handleFirstStepGameClick(
                                                         gameId,
                                                         gameConfig.name,
                                                     )
                                                 }
-                                                className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
                                                 aria-label={`Remove ${gameConfig.name}`}
                                             >
-                                                <X className='h-3 w-3' />
-                                            </button>
+                                                <X />
+                                            </Button>
                                         </Badge>
                                     ),
                                 )
                             ) : (
-                                <Badge className='bg-primary/10 text-primary border-primary/30 gap-1 border pr-1 font-medium'>
+                                <Badge
+                                    variant='secondary'
+                                    className='h-6 gap-1 pr-0.5'
+                                >
                                     {t('gamesAmountSelected', {
                                         gamesAmount: selectedGames.size,
                                     })}
-                                    <button
+                                    <Button
+                                        variant='ghost'
+                                        size='icon-xs'
                                         onClick={handleClearGames}
-                                        className='hover:bg-primary/20 cursor-pointer rounded-full p-0.5 transition-colors'
                                         aria-label={`Remove all`}
                                     >
-                                        <X className='h-3 w-3' />
-                                    </button>
+                                        <X />
+                                    </Button>
                                 </Badge>
                             )}
                         </div>
@@ -116,10 +122,9 @@ export const SearchStep = () => {
                             onClick={handleClearGames}
                             title={t('clearGames')}
                             variant='secondary'
-                            className='cursor-pointer!'
                         >
                             {t('clearGames')}
-                            <Eraser className='h-4 w-4' />
+                            <Eraser data-icon='inline-end' />
                         </Button>
                     </div>
                 )}

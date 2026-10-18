@@ -9,7 +9,7 @@ import {
     AttachmentActions,
     AttachmentMedia,
 } from '@/components/ui/attachment'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 type CustomImageUploadProps = {
@@ -44,7 +44,7 @@ export const CustomImageUpload = ({
     return (
         <Attachment
             orientation='vertical'
-            className={clsx(
+            className={cn(
                 'hover:ring-primary ring-muted w-full cursor-pointer border-0 ring-2 transition-all duration-300',
                 isSelected && 'ring-primary',
             )}
@@ -84,7 +84,7 @@ export const CustomImageUpload = ({
                 <AttachmentActions>
                     <AttachmentAction
                         onClick={handleRemove}
-                        className='bg-background'
+                        variant='secondary'
                         aria-label={`Remove icon`}
                     >
                         <XIcon />

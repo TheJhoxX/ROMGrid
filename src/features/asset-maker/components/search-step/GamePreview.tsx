@@ -35,7 +35,7 @@ export const GamePreview = ({ game }: GamePreviewProps) => {
             className='object-cover'
         />
     ) : (
-        <div className='text-primary bg-primary/30 ring-primary flex h-full items-center justify-center rounded-lg border'>
+        <div className='bg-muted text-muted-foreground flex h-full items-center justify-center rounded-lg'>
             <ImageOff />
         </div>
     )
@@ -74,7 +74,7 @@ export const GamePreview = ({ game }: GamePreviewProps) => {
                         <div className='flex flex-wrap gap-1'>
                             {game.types.map((type: string) => (
                                 <Badge
-                                    className='bg-secondary/30 text-secondary border-secondary border text-xs font-semibold'
+                                    variant='secondary'
                                     key={game.id + '-' + type}
                                 >
                                     {type}
@@ -124,7 +124,7 @@ export const GamePreview = ({ game }: GamePreviewProps) => {
                 <ItemFooter className='inline-flex flex-wrap justify-start'>
                     {game.types.map((type: string) => (
                         <Badge
-                            className='bg-secondary/30 text-secondary border-secondary border text-sm font-semibold'
+                            variant='secondary'
                             key={game.id + '-' + type}
                         >
                             {type}

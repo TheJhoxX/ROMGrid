@@ -84,12 +84,12 @@ export const GameRow = ({ gameId }: GameRowProps) => {
                             <Button
                                 onClick={() => fetchNextPage()}
                                 disabled={isFetchingNextPage}
-                                className='inline-flex w-fit cursor-pointer items-center gap-2'
+                                className='w-fit'
                             >
                                 {isFetchingNextPage ? (
-                                    <Spinner />
+                                    <Spinner data-icon='inline-start' />
                                 ) : (
-                                    <CloudDownload />
+                                    <CloudDownload data-icon='inline-start' />
                                 )}
                                 <span className='text-xs font-medium'>
                                     {tActions('loadMore')}

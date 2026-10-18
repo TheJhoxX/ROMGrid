@@ -28,17 +28,18 @@ export const FramesPanelBody = ({
                 return (
                     <Item
                         size='xs'
-                        className={cn(
-                            style === adjustment.frameStyle && 'bg-muted',
-                            'transition-colors duration-300',
-                        )}
-                        variant='outline'
+                        variant={
+                            style === adjustment.frameStyle
+                                ? 'muted'
+                                : 'outline'
+                        }
                         key={'icon-frame-' + style}
                         asChild
                     >
                         <button
                             className='cursor-pointer'
                             type='button'
+                            aria-pressed={style === adjustment.frameStyle}
                             onClick={() =>
                                 onUpdateAdjustment('frameStyle', style)
                             }
@@ -79,7 +80,7 @@ export const FramesPanel = ({
     const t = useTranslations('assetMaker.steps.customize')
 
     return (
-        <Card className={cn('overflow-y-auto rounded-lg p-4', className)}>
+        <Card className={cn('overflow-y-auto', className)}>
             <CardHeader>
                 <CardTitle>{t('frames.title')}</CardTitle>
             </CardHeader>

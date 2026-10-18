@@ -18,6 +18,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { Button } from '@/components/ui/button'
 
 type NavigationMenuItemType = {
     title: string
@@ -49,23 +50,25 @@ export const HomeNavigationMenu = () => {
         <div className='bg-background sticky top-0 z-50 flex w-full items-center justify-between gap-1 px-2 py-1'>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Link
-                        href='/'
-                        className='hover:bg-muted inline-flex items-center gap-2 rounded-xl px-3 py-1.5'
+                    <Button
+                        variant='ghost'
+                        asChild
                     >
-                        <Image
-                            src='/images/logo.svg'
-                            alt='ROMGrid'
-                            width={32}
-                            height={32}
-                        />
-                        <p className='font-black tracking-[-0.04em]'>
-                            ROM
-                            <span className='from-primary to-secondary bg-linear-to-r bg-clip-text text-transparent'>
-                                Grid
+                        <Link href='/'>
+                            <Image
+                                src='/images/logo.svg'
+                                alt='ROMGrid'
+                                width={32}
+                                height={32}
+                            />
+                            <span className='font-black tracking-[-0.04em]'>
+                                ROM
+                                <span className='from-primary to-secondary bg-linear-to-r bg-clip-text text-transparent'>
+                                    Grid
+                                </span>
                             </span>
-                        </p>
-                    </Link>
+                        </Link>
+                    </Button>
                 </TooltipTrigger>
                 <TooltipContent>{'Home'}</TooltipContent>
             </Tooltip>
@@ -83,7 +86,6 @@ export const HomeNavigationMenu = () => {
                                             className={cn(
                                                 navigationMenuTriggerStyle(),
                                                 'rounded-full',
-                                                'data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary data-active:focus:bg-primary data-active:focus:text-primary-foreground',
                                             )}
                                         >
                                             <Link href={item.href}>

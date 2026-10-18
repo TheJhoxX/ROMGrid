@@ -12,6 +12,7 @@ import { Copyright, GitCommitHorizontal } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
     const t = useTranslations('home')
@@ -92,9 +93,10 @@ export default function Home() {
                 <Card className='transition-all duration-300 ease-in-out hover:-translate-y-1.5'>
                     <CardHeader>
                         <CardTitle>{t('community.title')}</CardTitle>
-                        <CardAction className='text-secondary-foreground bg-secondary flex items-center gap-2 rounded-full px-2 py-1 font-bold'>
-                            <p>{t('community.comingSoon')}</p>
-                            <span>👀</span>
+                        <CardAction>
+                            <Badge variant='secondary'>
+                                {t('community.comingSoon')} 👀
+                            </Badge>
                         </CardAction>
                     </CardHeader>
                     <CardContent>
@@ -126,14 +128,15 @@ export default function Home() {
                         </CardDescription>
                     </CardContent>
                     <CardFooter>
-                        <Link
-                            href='https://github.com/TheJhoxX/ROMGrid.git'
-                            target='_blank'
-                            className='text-primary-foreground bg-primary flex items-center gap-2 rounded-lg px-2 py-1'
-                        >
-                            <GitCommitHorizontal />
-                            <p>{t('support.visitRepository')}</p>
-                        </Link>
+                        <Button asChild>
+                            <Link
+                                href='https://github.com/TheJhoxX/ROMGrid.git'
+                                target='_blank'
+                            >
+                                <GitCommitHorizontal data-icon='inline-start' />
+                                {t('support.visitRepository')}
+                            </Link>
+                        </Button>
                     </CardFooter>
                 </Card>
 

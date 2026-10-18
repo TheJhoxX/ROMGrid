@@ -172,9 +172,7 @@ export const SettingsPanel = ({
     const t = useTranslations('assetMaker.steps.customize')
 
     return (
-        <Card
-            className={cn('shrink-0 overflow-y-auto rounded-lg p-4', className)}
-        >
+        <Card className={cn('shrink-0 overflow-y-auto', className)}>
             <CardHeader>
                 <CardTitle>{t('settings.title')}</CardTitle>
                 <CardDescription>{t('settings.description')}</CardDescription>

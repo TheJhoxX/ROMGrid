@@ -35,7 +35,7 @@ export const PanelDrawer = ({
                 variant='outline'
                 className='w-full'
             >
-                <Icon />
+                <Icon data-icon='inline-start' />
                 {title}
             </Button>
         </DrawerTrigger>

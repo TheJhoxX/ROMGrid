@@ -76,14 +76,14 @@ export const SettingsPage = () => {
                             <Button
                                 variant='outline'
                                 id='cancelEdit'
-                                className='flex-1 cursor-pointer'
+                                className='flex-1'
                                 onClick={() => setIsEditing(false)}
                             >
                                 {t('general.actions.cancel')}
                             </Button>
                         )}
                         <Button
-                            className='flex-1 cursor-pointer'
+                            className='flex-1'
                             onClick={handleButtonSubmit}
                         >
                             {isEditing

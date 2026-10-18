@@ -76,7 +76,6 @@ export const AssetMakerHeader = ({
                     size='sm'
                     disabled={disabled}
                     onClick={onAction}
-                    className='text-primary-foreground cursor-pointer'
                 >
                     {t(action.labelKey)}
                     <ActionIcon data-icon='inline-end' />
