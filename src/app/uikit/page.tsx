@@ -30,6 +30,7 @@ const UiKitPage = async () => {
                                 alt: '',
                                 backgroundColor: 'transparent',
                                 borderRadius: 0,
+                                fit: 'cover',
                             }}
                         />
                     </div>

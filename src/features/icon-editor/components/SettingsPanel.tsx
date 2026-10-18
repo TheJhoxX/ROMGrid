@@ -17,12 +17,24 @@ import {
     InputGroupInput,
 } from '@/components/ui/input-group'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { Crop, Expand, Scan, Shrink } from 'lucide-react'
 
 export const SettingsPanelBody = ({
     adjustment,
     onUpdateAdjustment,
 }: IconPanelProps) => {
     const t = useTranslations('assetMaker.steps.customize')
+    const fitLabels = {
+        contain: t('settings.fit.contain'),
+        cover: t('settings.fit.cover'),
+        fill: t('settings.fit.fill'),
+        scaleDown: t('settings.fit.scaleDown'),
+    }
     return (
         <FieldGroup>
             <Field>
@@ -73,42 +85,79 @@ export const SettingsPanelBody = ({
                 />
             </Field>
             <Field>
-                <FieldLabel>Image fit</FieldLabel>
+                <FieldLabel>{t('settings.fit.title')}</FieldLabel>
                 <ToggleGroup
                     type='single'
                     spacing={1}
-                    defaultValue={adjustment.fit}
+                    value={adjustment.fit}
+                    aria-label={t('settings.fit.title')}
                     onValueChange={(value) => {
-                        onUpdateAdjustment(
-                            'fit',
-                            value as IconAdjustment['fit'],
-                        )
+                        if (value) {
+                            onUpdateAdjustment(
+                                'fit',
+                                value as IconAdjustment['fit'],
+                            )
+                        }
                     }}
                 >
-                    <ToggleGroupItem
-                        value='contain'
-                        aria-label='Contain'
-                    >
-                        Contain
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                        value='cover'
-                        aria-label='Cover'
-                    >
-                        Cover
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                        value='fill'
-                        aria-label='Fill'
-                    >
-                        Fill
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                        value='scale-down'
-                        aria-label='Scale down'
-                    >
-                        Scale down
-                    </ToggleGroupItem>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToggleGroupItem
+                                value='contain'
+                                aria-label={fitLabels.contain}
+                                data-state={
+                                    adjustment.fit === 'contain' ? 'on' : 'off'
+                                }
+                            >
+                                <Scan />
+                            </ToggleGroupItem>
+                        </TooltipTrigger>
+                        <TooltipContent>{fitLabels.contain}</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToggleGroupItem
+                                value='cover'
+                                aria-label={fitLabels.cover}
+                                data-state={
+                                    adjustment.fit === 'cover' ? 'on' : 'off'
+                                }
+                            >
+                                <Crop />
+                            </ToggleGroupItem>
+                        </TooltipTrigger>
+                        <TooltipContent>{fitLabels.cover}</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToggleGroupItem
+                                value='fill'
+                                aria-label={fitLabels.fill}
+                                data-state={
+                                    adjustment.fit === 'fill' ? 'on' : 'off'
+                                }
+                            >
+                                <Expand />
+                            </ToggleGroupItem>
+                        </TooltipTrigger>
+                        <TooltipContent>{fitLabels.fill}</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToggleGroupItem
+                                value='scale-down'
+                                aria-label={fitLabels.scaleDown}
+                                data-state={
+                                    adjustment.fit === 'scale-down'
+                                        ? 'on'
+                                        : 'off'
+                                }
+                            >
+                                <Shrink />
+                            </ToggleGroupItem>
+                        </TooltipTrigger>
+                        <TooltipContent>{fitLabels.scaleDown}</TooltipContent>
+                    </Tooltip>
                 </ToggleGroup>
             </Field>
         </FieldGroup>

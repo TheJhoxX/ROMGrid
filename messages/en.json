@@ -129,7 +129,14 @@
                     "description": "Tweak the icon to find the perfect style",
                     "size": "Size",
                     "backgroundColor": "Background color",
-                    "borderRadius": "Border radius — {value}%"
+                    "borderRadius": "Border radius — {value}%",
+                    "fit": {
+                        "title": "Image fit",
+                        "contain": "Contain",
+                        "cover": "Cover",
+                        "fill": "Fill",
+                        "scaleDown": "Scale down"
+                    }
                 },
                 "frames": {
                     "title": "Frames",
