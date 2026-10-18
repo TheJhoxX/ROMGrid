@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { saveAs } from 'file-saver'
-import { Download, ImagePlus, X } from 'lucide-react'
+import { Download, ImageOff, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { IconEditor } from './IconEditor'
@@ -10,6 +10,16 @@ import { IconArtwork } from './IconArtwork'
 import { DEFAULT_ICON_ADJUSTMENT } from './defaults'
 import { exportFramedIcon } from './frames/export'
 import type { IconAdjustment } from './types'
+import {
+    Item,
+    ItemActions,
+    ItemContent,
+    ItemDescription,
+    ItemMedia,
+    ItemTitle,
+} from '@/components/ui/item'
+import Image from 'next/image'
+import { useBreakpoint } from '@/hooks/useBreakpoint'
 
 export default function ImageStudio() {
     const t = useTranslations('imageStudio')
@@ -21,6 +31,8 @@ export default function ImageStudio() {
     const [isExporting, setIsExporting] = useState(false)
     const [exportError, setExportError] = useState(false)
     const exportNode = useRef<HTMLDivElement>(null)
+    const imageInput = useRef<HTMLInputElement>(null)
+    const { isAtLeastMd } = useBreakpoint()
 
     useEffect(() => {
         return () => {
@@ -36,7 +48,7 @@ export default function ImageStudio() {
     }
 
     const handleExport = async () => {
-        if (!exportNode.current || isExporting) return
+        if (!imageUrl || !exportNode.current || isExporting) return
         setExportError(false)
         setIsExporting(true)
         try {
@@ -65,6 +77,7 @@ export default function ImageStudio() {
                 <Button
                     onClick={() => void handleExport()}
                     disabled={
+                        !imageUrl ||
                         isExporting ||
                         adjustment.width < 16 ||
                         adjustment.width > 1024
@@ -75,31 +88,63 @@ export default function ImageStudio() {
                 </Button>
             </header>
 
-            <div className='flex flex-wrap items-center gap-2'>
-                <Button
+            <div className='flex flex-col gap-2'>
+                <Item
                     variant='outline'
-                    asChild
+                    className='w-full max-w-full md:w-fit'
                 >
-                    <label className='cursor-pointer'>
-                        <ImagePlus data-icon='inline-start' />
-                        {imageUrl ? t('replaceImage') : t('addImage')}
+                    <ItemMedia
+                        variant='image'
+                        className='group-has-data-[slot=item-description]/item:translate-y-0 group-has-data-[slot=item-description]/item:self-center'
+                    >
+                        {imageUrl ? (
+                            <Image
+                                src={imageUrl}
+                                alt={t('uploadedImageAlt')}
+                                width={32}
+                                height={32}
+                            />
+                        ) : (
+                            <div className='bg-muted flex size-full items-center justify-center'>
+                                <ImageOff />
+                            </div>
+                        )}
+                    </ItemMedia>
+                    <ItemContent>
+                        <ItemTitle>{t('artworkTitle')}</ItemTitle>
+                        <ItemDescription>
+                            {imageUrl ? t('imageReady') : t('noImage')}
+                        </ItemDescription>
+                    </ItemContent>
+                    <ItemActions>
+                        <Button
+                            variant={!imageUrl ? undefined : 'secondary'}
+                            onClick={() => imageInput.current?.click()}
+                        >
+                            <ImageUp data-icon='inline-start' />
+                            {isAtLeastMd &&
+                                (imageUrl ? t('replaceImage') : t('addImage'))}
+                        </Button>
                         <input
+                            ref={imageInput}
                             type='file'
                             accept='image/*'
                             onChange={handleImageChange}
-                            className='sr-only'
+                            hidden
                         />
-                    </label>
-                </Button>
-                {imageUrl && (
-                    <Button
-                        variant='ghost'
-                        onClick={() => setImageUrl(null)}
-                    >
-                        <X data-icon='inline-start' />
-                        {t('removeImage')}
-                    </Button>
-                )}
+                        {imageUrl && (
+                            <Button
+                                variant='destructive'
+                                size='icon'
+                                className='rounded-full'
+                                aria-label={t('removeImage')}
+                                onClick={() => setImageUrl(null)}
+                            >
+                                <X />
+                            </Button>
+                        )}
+                    </ItemActions>
+                </Item>
                 {exportError && (
                     <p
                         role='alert'
