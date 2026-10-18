@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { saveAs } from 'file-saver'
-import { Download, ImageOff, X } from 'lucide-react'
+import { Download, ImageOff, ImageUp, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { IconEditor } from './IconEditor'
